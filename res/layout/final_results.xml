@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/background" >
+    
+    <RelativeLayout 
+        android:id="@+id/final_results" 
+        android:layout_width="fill_parent"  
+        android:layout_height="wrap_content"  
+        android:padding="15dip"          
+        android:layout_margin="15dip"   
+        android:background="@drawable/background_div">
+        
+        <TextView   
+            android:id="@+id/result_1"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_alignParentTop="true"  
+            android:layout_marginTop="5dp"  
+            android:text="@string/user_input_1"  
+            style="@style/normalText"/>  
+        <TextView   
+            android:id="@+id/factors_for_num_1"  
+            android:layout_width="fill_parent"  
+            android:layout_height="wrap_content"   
+            android:layout_below="@id/result_1"  
+            android:singleLine="false"
+            android:textSize="12sp" />
+        
+        <TextView   
+            android:id="@+id/result_2"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_below="@id/factors_for_num_1"    
+            android:layout_marginTop="5dp"  
+            android:text="@string/user_input_1"  
+            style="@style/normalText"/>  
+        <TextView   
+            android:id="@+id/factors_for_num_2"  
+            android:layout_width="fill_parent"  
+            android:layout_height="wrap_content"   
+            android:layout_below="@id/result_2"  
+            android:singleLine="false"          
+            android:textSize="12sp" />
+        
+        <TextView   
+            android:id="@+id/result_3"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_below="@id/factors_for_num_2"    
+            android:layout_marginTop="5dp"  
+            android:text="@string/user_input_1"  
+            style="@style/normalText"/>  
+        <TextView   
+            android:id="@+id/factors_for_num_3"  
+            android:layout_width="fill_parent"  
+            android:layout_height="wrap_content"   
+            android:layout_below="@id/result_3"  
+            android:singleLine="false"          
+            android:textSize="12sp" />
+        
+        <TextView   
+            android:id="@+id/result_4"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_below="@id/factors_for_num_3"    
+            android:layout_marginTop="5dp"  
+            android:text="@string/user_input_1"  
+            style="@style/normalText"/>  
+        <TextView   
+            android:id="@+id/factors_for_num_4"  
+            android:layout_width="fill_parent"  
+            android:layout_height="wrap_content"   
+            android:layout_below="@id/result_4"  
+            android:singleLine="false"               
+            android:textSize="12sp" />
+        
+        <TextView   
+            android:id="@+id/result_5"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_below="@id/factors_for_num_4"    
+            android:layout_marginTop="5dp"  
+            android:text="@string/user_input_1"  
+            style="@style/normalText"/>  
+        <TextView   
+            android:id="@+id/factors_for_num_5"  
+            android:layout_width="fill_parent"  
+            android:layout_height="wrap_content"   
+            android:layout_below="@id/result_5"  
+            android:singleLine="false"
+            android:textSize="12sp" />
+        
+    </RelativeLayout>
+    
+    <TableLayout   
+   		android:id="@+id/button_operation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dip"          
+        android:layout_margin="15dip"   
+        android:background="@drawable/background_div" 
+        android:stretchColumns="0,1,2" >
+        
+ 	   <TableRow>
+			<Button   
+            android:id="@+id/back_button"  
+            android:layout_width="1dip"  
+            android:layout_height="35dip"   
+            android:text="@string/back_label"
+            android:background="@drawable/submit_button"
+            android:layout_column="1" />
+        
+        </TableRow>
+        
+ 	</TableLayout>
+
+</LinearLayout>
