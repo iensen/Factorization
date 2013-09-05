@@ -1,9 +1,19 @@
 package com.example.multithread;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+
+import com.example.algorithms.FactorizationAlgo;
+import com.example.algorithms.FermatMethod;
+import com.example.algorithms.PollardRo;
+import com.example.algorithms.PrimitiveDivision;
+
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -14,145 +24,161 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class MainActivity extends Activity implements OnClickListener{
-	
-	private String test_string;
+/**
+ * Class implements main activity which will be running when the application
+ * starts
+ */
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE); 
-        setContentView(R.layout.activity_main);
-        
-        View reset_button = findViewById(R.id.reset_button);
-        reset_button.setOnClickListener(this);
-        
-        View exit_button = findViewById(R.id.exit_button);
-        exit_button.setOnClickListener(this);
-        
-        View submit_button = findViewById(R.id.submit_button);
-        submit_button.setOnClickListener(this);
-    }
+public class MainActivity extends Activity implements OnClickListener {
 
+	/**
+	 * Array of input boxes which store the numbers to be factored
+	 */
+	private EditText inputs[];
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+	/**
+	 * Array of spinners which store the selections of the algorithms to be
+	 * used. algorithmsSelections[i] contains the algorithm id which will be
+	 * used to factor the number stored in inputs[i]
+	 */
+	private Spinner algorithmSelections[];
 
+	/** Called when the activity is first created. */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_main);
 
+		// set up listeners:
+		View reset_button = findViewById(R.id.reset_button);
+		reset_button.setOnClickListener(this);
+
+		View exit_button = findViewById(R.id.exit_button);
+		exit_button.setOnClickListener(this);
+
+		View submit_button = findViewById(R.id.submit_button);
+		submit_button.setOnClickListener(this);
+
+		// initialize array of inputs (numbers to be factored)
+		inputs = new EditText[] { (EditText) findViewById(R.id.number_1),
+				(EditText) findViewById(R.id.number_2),
+				(EditText) findViewById(R.id.number_3),
+				(EditText) findViewById(R.id.number_4),
+				(EditText) findViewById(R.id.number_5) };
+
+		// initialize array of the spinners containing algorithm selections:
+		algorithmSelections = new Spinner[] {
+				(Spinner) findViewById(R.id.algorithm_1),
+				(Spinner) findViewById(R.id.algorithm_2),
+				(Spinner) findViewById(R.id.algorithm_3),
+				(Spinner) findViewById(R.id.algorithm_4),
+				(Spinner) findViewById(R.id.algorithm_5),
+				};
+	}
+
+	private FactorizationAlgo getAlgorithmById(int id) {
+		switch (id) {
+		case 0:
+			return new PrimitiveDivision();
+		case 1:
+			return new PollardRo();
+		case 2:
+			return new FermatMethod();
+		default:
+			return null;
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
-		final EditText input_1 = (EditText) findViewById(R.id.number_1);
-		EditText input_2 = (EditText) findViewById(R.id.number_2);
-		EditText input_3 = (EditText) findViewById(R.id.number_3);
-		EditText input_4 = (EditText) findViewById(R.id.number_4);
-		EditText input_5 = (EditText) findViewById(R.id.number_5);
-		
-		Spinner spinner_algorithm_1 = (Spinner) findViewById(R.id.algorithm_1);
-		Spinner spinner_algorithm_2 = (Spinner) findViewById(R.id.algorithm_2);
-		Spinner spinner_algorithm_3 = (Spinner) findViewById(R.id.algorithm_3);
-		Spinner spinner_algorithm_4 = (Spinner) findViewById(R.id.algorithm_4);
-		Spinner spinner_algorithm_5 = (Spinner) findViewById(R.id.algorithm_5);
-		
-		switch (v.getId()){
-		
-			case R.id.exit_button:
-				
-				System.exit(0);
-				
-				break;
-				
-			case R.id.reset_button:
-				
-        		input_1.setText("");
-        		input_2.setText("");
-        		input_3.setText("");
-        		input_4.setText("");
-        		input_5.setText("");
-        		
-        		spinner_algorithm_1.setSelection(0);
-        		spinner_algorithm_2.setSelection(0);
-        		spinner_algorithm_3.setSelection(0);
-        		spinner_algorithm_4.setSelection(0);
-        		spinner_algorithm_5.setSelection(0);
-        		
-        		break;
-			
-			case R.id.submit_button:
-				//Intent final_results_intent = new Intent(this, FinalResult.class);
-        		//startActivity(final_results_intent);
-        		
-        		//Thread
-        		Thread thread_one = new Thread(new Runnable(){
 
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						test_string = "hello" + input_1.getText().toString();
-						Log.v("Test", test_string);
-					}
-        			
-        		});
-        		thread_one.start();
-        		
-        		Thread thread_two = new Thread(new Runnable(){
+		switch (v.getId()) {
 
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						Log.v("Test", "hello cpu");
-					}
-        			
-        		});
-        		thread_two.start();
-        		
-        		Thread thread_three = new Thread(new Runnable(){
+		case R.id.exit_button:
+			System.exit(0);
+			break;
 
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						Log.v("Test", "hello cpu");
-					}
-        			
-        		});
-        		thread_three.start();
-        		
-        		Thread thread_four = new Thread(new Runnable(){
+		case R.id.reset_button:
+			// clear edit boxes
+			for (EditText input : inputs) {
+				input.setText("");
+			}
 
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						Log.v("Test", "hello cpu");
-					}
-        			
-        		});
-        		thread_four.start();
-        		
-        		Thread thread_five = new Thread(new Runnable(){
+			// clear algorithm selections
+			for (Spinner algorithmSelection : algorithmSelections) {
+				algorithmSelection.setSelection(0);
+			}
+			break;
 
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						Log.v("Test", "hello cpu");
+		case R.id.submit_button:
+			final String[] results = new String[inputs.length];
+			try {
+				final BigInteger[] integerInputs = parseInputs();
+				for (int i = 0; i < inputs.length; i++) {
+					final int index = i;
+					final int algorithmId = algorithmSelections[i]
+							.getSelectedItemPosition();
+					FactorizationTask task = new FactorizationTask(
+							new OnFactorizationTaskCompleteListener() {
+								@Override
+								public void onTaskComplete(String result) {
+									results[index] = result;
+								}
+							});
+					Pair<BigInteger, FactorizationAlgo> taskParams = new Pair<BigInteger, FactorizationAlgo>(
+							integerInputs[i], getAlgorithmById(algorithmId));
+
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+						task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+								taskParams);
+					} else {
+						task.execute(taskParams);
 					}
-        			
-        		});
-        		thread_five.start();
-        		//Thread
-        		
-				Intent final_results_intent = new Intent();
-				final_results_intent.putExtra("result_1", test_string);
-				final_results_intent.putExtra("result_2", input_2.getText().toString());
-				final_results_intent.putExtra("result_3", input_3.getText().toString());
-				final_results_intent.putExtra("result_4", input_4.getText().toString());
-				final_results_intent.putExtra("result_5", input_5.getText().toString());
-				final_results_intent.setClass(MainActivity.this, FinalResult.class);
-				startActivity(final_results_intent);
+				}
+			} catch (NumberFormatException ex) {
+				showAlertDialog("You should input numbers into all the edit boxes");
+			}
+
+			// Thread
+
+			Intent final_results_intent = new Intent();
+			for (int i = 0; i < inputs.length; i++) {
+				final_results_intent
+						.putExtra(CommunicationConstants.extraDescriptions[i],
+								results[i]);
+			}
+			final_results_intent.setClass(MainActivity.this,
+					ResultDisplayActivity.class);
+			startActivity(final_results_intent);
 		}
+
 	}
+
+	private void showAlertDialog(String message) {
+		AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+		dlgAlert.setMessage(message);
+		dlgAlert.setTitle("Factorization");
+		dlgAlert.setPositiveButton("OK", null);
+		dlgAlert.setCancelable(true);
+		dlgAlert.create().show();
+	}
+
+	private BigInteger[] parseInputs() {
+		BigInteger[] integerInputs = new BigInteger[inputs.length];
+		for (int i = 0; i < inputs.length; i++) {
+			integerInputs[i] = new BigInteger(inputs[i].getText().toString());
+		}
+		return integerInputs;
+	}
+
 }
