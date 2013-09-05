@@ -159,7 +159,6 @@ public class MainActivity extends Activity implements OnClickListener {
 							new OnFactorizationTaskCompleteListener() {
 								@Override
 								public void onTaskComplete(String result) {
-									Log.e("COMPLETE", "COMPLETE");
 									results[index] = result;
 
 									runOnUiThread(new Runnable() {

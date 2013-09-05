@@ -22,6 +22,8 @@ class FactorizationTask extends
 
 	@Override
 	protected Void doInBackground(Pair<BigInteger, FactorizationAlgo>... arg0) {
+		
+		
 		synchronized (taskCounter) {
 			taskCounter.addTask("Thread " + Thread.currentThread().getId()
 					+ ". Starting factorization: " + arg0[0].first);
