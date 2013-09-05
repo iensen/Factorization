@@ -1,7 +1,6 @@
 package com.example.multithread;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 
 import com.example.algorithms.FactorizationAlgo;
 import com.example.algorithms.FermatMethod;
@@ -20,8 +19,8 @@ import android.view.Menu;
 import android.view.View.OnClickListener;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 /**
@@ -42,6 +41,13 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * used to factor the number stored in inputs[i]
 	 */
 	private Spinner algorithmSelections[];
+
+	/**
+	 * Array of progress bars ProgressBar[i] is active if factorization of the
+	 * number inputs[i] is active
+	 */
+
+	private ProgressBar progressBars[];
 
 	/** Called when the activity is first created. */
 	@Override
@@ -73,8 +79,19 @@ public class MainActivity extends Activity implements OnClickListener {
 				(Spinner) findViewById(R.id.algorithm_2),
 				(Spinner) findViewById(R.id.algorithm_3),
 				(Spinner) findViewById(R.id.algorithm_4),
-				(Spinner) findViewById(R.id.algorithm_5),
-				};
+				(Spinner) findViewById(R.id.algorithm_5), };
+
+		// initialize array of progessBars:
+
+		progressBars = new ProgressBar[] {
+				(ProgressBar) findViewById(R.id.pb_1),
+				(ProgressBar) findViewById(R.id.pb_2),
+				(ProgressBar) findViewById(R.id.pb_3),
+				(ProgressBar) findViewById(R.id.pb_4),
+				(ProgressBar) findViewById(R.id.pb_5) };
+		for (ProgressBar progressBar : progressBars) {
+			progressBar.setVisibility(View.GONE);
+		}
 	}
 
 	private FactorizationAlgo getAlgorithmById(int id) {
@@ -96,6 +113,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+	FactorizationTask[] factorizationTasks;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -121,45 +140,81 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.submit_button:
+			final Intent final_results_intent = new Intent();
+			final_results_intent.setClass(MainActivity.this,
+					ResultDisplayActivity.class);
+
 			final String[] results = new String[inputs.length];
+			factorizationTasks = new FactorizationTask[inputs.length];
+			final TaskCounter taskCounter = new TaskCounter(inputs.length);
 			try {
 				final BigInteger[] integerInputs = parseInputs();
 				for (int i = 0; i < inputs.length; i++) {
 					final int index = i;
 					final int algorithmId = algorithmSelections[i]
 							.getSelectedItemPosition();
-					FactorizationTask task = new FactorizationTask(
+					final ProgressBar currentProgressBar = progressBars[i];
+					currentProgressBar.setVisibility(View.VISIBLE);
+					factorizationTasks[i] = new FactorizationTask(
 							new OnFactorizationTaskCompleteListener() {
 								@Override
 								public void onTaskComplete(String result) {
+									Log.e("COMPLETE", "COMPLETE");
 									results[index] = result;
+
+									runOnUiThread(new Runnable() {
+										public void run() {
+											currentProgressBar.setVisibility(View.GONE);
+											synchronized (taskCounter) {
+												if (taskCounter
+														.getRecievedTasksCount() == inputs.length
+														&& taskCounter
+																.getRunningTasksCount() == 0) {
+													for (int i = 0; i < inputs.length; i++) {
+														final_results_intent
+																.putExtra(
+																		CommunicationConstants.extraDescriptions[i],
+																		results[i] == null ? "Time Out"
+																				: results[i]);
+													}
+													startActivity(final_results_intent);
+												}
+
+											}
+
+										}
+									});
+
 								}
-							});
+							}, taskCounter);
 					Pair<BigInteger, FactorizationAlgo> taskParams = new Pair<BigInteger, FactorizationAlgo>(
 							integerInputs[i], getAlgorithmById(algorithmId));
 
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-						task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-								taskParams);
+						factorizationTasks[i].executeOnExecutor(
+								AsyncTask.THREAD_POOL_EXECUTOR, taskParams);
 					} else {
-						task.execute(taskParams);
+						factorizationTasks[i].execute(taskParams);
 					}
+
+					Handler handler = new Handler();
+					handler.postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							if (factorizationTasks[index].getStatus() == AsyncTask.Status.RUNNING)
+								factorizationTasks[index].completeTask();
+							runOnUiThread(new Runnable() {
+								public void run() {
+									currentProgressBar.setVisibility(View.GONE);
+								}
+							});
+						}
+					}, 30000);
+
 				}
 			} catch (NumberFormatException ex) {
 				showAlertDialog("You should input numbers into all the edit boxes");
 			}
-
-			// Thread
-
-			Intent final_results_intent = new Intent();
-			for (int i = 0; i < inputs.length; i++) {
-				final_results_intent
-						.putExtra(CommunicationConstants.extraDescriptions[i],
-								results[i]);
-			}
-			final_results_intent.setClass(MainActivity.this,
-					ResultDisplayActivity.class);
-			startActivity(final_results_intent);
 		}
 
 	}
@@ -180,5 +235,4 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 		return integerInputs;
 	}
-
 }

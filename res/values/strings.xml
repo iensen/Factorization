@@ -16,9 +16,9 @@
 	<string name="back_label">Go Back</string>
 
     <string-array name="algorithm_array">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
+        <item>Primitive Division</item>
+        <item>Pollard\'s Rho Algorithm</item>
+        <item>Fermat\'s Method</item>
     </string-array>
 
 </resources>

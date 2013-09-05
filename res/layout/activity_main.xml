@@ -38,6 +38,14 @@
             android:entries="@array/algorithm_array"
             android:textSize="12sp"
             android:gravity="center" />
+		   <ProgressBar
+			 android:id="@+id/pb_1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             style="@android:style/Widget.ProgressBar.Small"
+             android:layout_marginRight="5dp"
+             android:layout_marginTop="18dp"
+             android:gravity="center"  />
 		</TableRow>
 		
         <TableRow>
@@ -65,6 +73,15 @@
             android:entries="@array/algorithm_array"
             android:textSize="12sp"
             android:gravity="center" />
+			
+		    <ProgressBar
+			 android:id="@+id/pb_2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             style="@android:style/Widget.ProgressBar.Small"
+             android:layout_marginRight="5dp"
+             android:layout_marginTop="18dp"
+             android:gravity="center"  />
 		</TableRow>
 		
         <TableRow>
@@ -92,6 +109,14 @@
             android:entries="@array/algorithm_array"
             android:textSize="12sp"
             android:gravity="center" />
+				 <ProgressBar
+			 android:id="@+id/pb_3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             style="@android:style/Widget.ProgressBar.Small"
+             android:layout_marginRight="5dp"
+             android:layout_marginTop="18dp"
+             android:gravity="center"  />
 		</TableRow>
 		
         <TableRow>
@@ -119,6 +144,14 @@
             android:entries="@array/algorithm_array"
             android:textSize="12sp"
             android:gravity="center" />
+			 <ProgressBar
+			 android:id="@+id/pb_4"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             style="@android:style/Widget.ProgressBar.Small"
+             android:layout_marginRight="5dp"
+             android:layout_marginTop="18dp"
+             android:gravity="center"  />
 		</TableRow>
 		
         <TableRow>
@@ -146,6 +179,15 @@
             android:entries="@array/algorithm_array"
             android:textSize="12sp"
             android:gravity="center" />
+			 <ProgressBar
+			 android:id="@+id/pb_5"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             style="@android:style/Widget.ProgressBar.Small"
+             android:layout_marginRight="5dp"
+             android:layout_marginTop="18dp"
+             android:gravity="center"  />
+			
 		</TableRow>
 			
     </TableLayout>
