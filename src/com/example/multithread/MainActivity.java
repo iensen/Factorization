@@ -46,7 +46,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * Array of progress bars ProgressBar[i] is active if factorization of the
 	 * number inputs[i] is active
 	 */
-
+	boolean resetPressed=false;
+	boolean exitPressed=false;
 	private ProgressBar progressBars[];
 
 	/** Called when the activity is first created. */
@@ -82,7 +83,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				(Spinner) findViewById(R.id.algorithm_5), };
 
 		// initialize array of progessBars:
-
+		
 		progressBars = new ProgressBar[] {
 				(ProgressBar) findViewById(R.id.pb_1),
 				(ProgressBar) findViewById(R.id.pb_2),
@@ -90,8 +91,9 @@ public class MainActivity extends Activity implements OnClickListener {
 				(ProgressBar) findViewById(R.id.pb_4),
 				(ProgressBar) findViewById(R.id.pb_5) };
 		for (ProgressBar progressBar : progressBars) {
-			progressBar.setVisibility(View.GONE);
+			progressBar.setVisibility(View.INVISIBLE);
 		}
+		
 	}
 
 	private FactorizationAlgo getAlgorithmById(int id) {
@@ -124,11 +126,15 @@ public class MainActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 
 		case R.id.exit_button:
-			System.exit(0);
+			//System.exit(0);
+			exitPressed=true;
+			MainActivity.this.finish();
+			stopTasks();
 			break;
 
 		case R.id.reset_button:
 			// clear edit boxes
+			resetPressed=true;
 			for (EditText input : inputs) {
 				input.setText("");
 			}
@@ -137,9 +143,15 @@ public class MainActivity extends Activity implements OnClickListener {
 			for (Spinner algorithmSelection : algorithmSelections) {
 				algorithmSelection.setSelection(0);
 			}
+			
+			//System.exit(0);
+			
+			stopTasks();
+			
 			break;
 
 		case R.id.submit_button:
+			resetPressed=false;
 			final Intent final_results_intent = new Intent();
 			final_results_intent.setClass(MainActivity.this,
 					ResultDisplayActivity.class);
@@ -163,7 +175,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 									runOnUiThread(new Runnable() {
 										public void run() {
-											currentProgressBar.setVisibility(View.GONE);
+											currentProgressBar.setVisibility(View.INVISIBLE);
 											synchronized (taskCounter) {
 												if (taskCounter
 														.getRecievedTasksCount() == inputs.length
@@ -176,7 +188,8 @@ public class MainActivity extends Activity implements OnClickListener {
 																		results[i] == null ? "Time Out"
 																				: results[i]);
 													}
-													startActivity(final_results_intent);
+													if(!resetPressed && !exitPressed)
+													   startActivity(final_results_intent);
 												}
 
 											}
@@ -201,10 +214,10 @@ public class MainActivity extends Activity implements OnClickListener {
 						@Override
 						public void run() {
 							if (factorizationTasks[index].getStatus() == AsyncTask.Status.RUNNING)
-								factorizationTasks[index].completeTask();
+								factorizationTasks[index].completeTask(false);
 							runOnUiThread(new Runnable() {
 								public void run() {
-									currentProgressBar.setVisibility(View.GONE);
+									currentProgressBar.setVisibility(View.INVISIBLE);
 								}
 							});
 						}
@@ -216,6 +229,16 @@ public class MainActivity extends Activity implements OnClickListener {
 			}
 		}
 
+	}
+
+	private void stopTasks() {
+		for (ProgressBar progressBar : progressBars) {
+			progressBar.setVisibility(View.INVISIBLE);
+		}
+		
+		for(FactorizationTask task: factorizationTasks) {
+			task.completeTask(true);
+		}
 	}
 
 	private void showAlertDialog(String message) {

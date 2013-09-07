@@ -31,18 +31,19 @@ class FactorizationTask extends
 		factorizationResult = getMultiplicationString(arg0[0].second
 				.run(arg0[0].first));
 
-		completeTask();
+		completeTask(false);
 		return null;
 	}
 
-	public void completeTask() {
+	public void completeTask(boolean fail) {
 		synchronized (taskCounter) {
 
 			if (!taskComplete) {
 				taskCounter.removeTask("Thread "
 						+ Thread.currentThread().getId()
 						+ ". factorization found: " + factorizationResult);
-				this.callback.onTaskComplete(factorizationResult);
+			//	if(!fail)
+				   this.callback.onTaskComplete(factorizationResult);
 				taskComplete = true;
 			}
 		}

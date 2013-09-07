@@ -116,5 +116,14 @@
         </TableRow>
         
  	</TableLayout>
+ 	
+    <ImageView android:id="@+id/bottom_pic_logo"  
+            android:src="@drawable/bottom_pic"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_marginRight="25dp"  
+            android:layout_marginLeft="10dp"  
+            android:layout_marginBottom="25dp"
+            android:layout_gravity="center" />
 
 </LinearLayout>

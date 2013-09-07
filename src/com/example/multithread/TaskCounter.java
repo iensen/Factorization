@@ -8,12 +8,11 @@ public class TaskCounter {
 
 	private int runningTasksCount;
 	private int recievedTasksCount=0;
-    private int expectedTasksCount;
     
     
 	public TaskCounter(int expectedTasksCount) {
 		this.runningTasksCount = 0;
-		this.expectedTasksCount=expectedTasksCount;
+
 		
 	}
 	
@@ -28,9 +27,6 @@ public class TaskCounter {
 	{
 		Log.v("", logMessage);
 		runningTasksCount--;	
-		if(runningTasksCount==0 && expectedTasksCount==recievedTasksCount) {
-			this.notify();
-		}
 	}
 	
 	public int getRunningTasksCount() {
