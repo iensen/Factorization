@@ -239,7 +239,7 @@
             android:layout_width="1dip"  
             android:layout_height="35dip"   
             android:text="@string/submit_label"
-            android:background="@drawable/submit_button" />
+            android:background="@drawable/submit_button"  />
 			<Button   
             android:id="@+id/exit_button"  
             android:layout_width="1dip"  

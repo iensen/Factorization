@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import com.example.algorithms.FactorizationAlgo;
 import android.os.AsyncTask;
-import android.util.Log;
+
 
 class FactorizationTask extends
 		AsyncTask<Pair<BigInteger, FactorizationAlgo>, Void, Void> {

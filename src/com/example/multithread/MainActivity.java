@@ -14,7 +14,6 @@ import android.os.Handler;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View.OnClickListener;
 import android.view.View;
