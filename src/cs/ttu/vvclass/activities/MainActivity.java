@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View.OnClickListener;
 import android.view.View;
@@ -59,6 +60,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * Timeout used for stopping threads which are running too long
 	 */
 	static private final int timeout=30000;
+	/**
+	 * Intent for starting result display activity 
+	 */
+	Intent final_results_intent;
+	
 	/** Called when the activity is first created. */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -156,12 +162,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 
 		case R.id.exit_button:
-			exitPressed = true;
-			// finalize current activity and all the factorization tasks running
-			MainActivity.this.finish();
-			// Each number which has not been factored yet is being factored
-			// in a separate thread, which is going to be stopped now.
-			stopTasks();
+			android.os.Process.killProcess(android.os.Process.myPid());
 			break;
 
 		case R.id.reset_button:
@@ -176,12 +177,13 @@ public class MainActivity extends Activity implements OnClickListener {
 				algorithmSelection.setSelection(0);
 			}
 			stopTasks();
+	
 			break;
 
 		case R.id.submit_button:
 			resetPressed = false;
 			// create an intend for displaying the results
-			final Intent final_results_intent = new Intent();
+			final_results_intent = new Intent();
 			final_results_intent.setClass(MainActivity.this,
 					ResultDisplayActivity.class);
 			final String[] results = new String[inputs.length];
@@ -239,8 +241,11 @@ public class MainActivity extends Activity implements OnClickListener {
 													}
 													// if the execution wasn't stopped, show the result:
 													if (!resetPressed
-															&& !exitPressed)
+															&& !exitPressed) {
+														Log.v("FFF", "FFF");
 														startActivity(final_results_intent);
+														finish();
+													}
 												}
 
 											}
@@ -304,9 +309,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		for (ProgressBar progressBar : progressBars) {
 			progressBar.setVisibility(View.INVISIBLE);
 		}
-        // complete the tasks:
+        // complete the tasks if they were started:
+		if(factorizationTasks!=null)
 		for (FactorizationTask task : factorizationTasks) {
-			task.completeTask();
+			  if(task!=null)
+			  task.completeTask();
 		}
 	}
 
