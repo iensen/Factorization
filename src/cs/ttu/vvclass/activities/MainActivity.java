@@ -244,7 +244,6 @@ public class MainActivity extends Activity implements OnClickListener {
 													// if the execution wasn't stopped, show the result:
 													if (!resetPressed
 															&& !exitPressed) {
-														Log.v("FFF", "FFF");
 														startActivity(final_results_intent);
 														finish();
 													}
