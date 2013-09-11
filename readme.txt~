@@ -1,0 +1,88 @@
+This android application allows to factor numbers using different algorithms.
+
+
+PACKAGE CONTENTS
+================
+
+src/	   - contains the sources of the application.
+
+doc/	   - documentation containing a user guide and a developer guide.
+
+snapshots/ - some snapshots of the application.
+
+bin/       - executable binary of the application
+
+readme.txt - this readme file
+
+
+PREREQUISITES
+=============
+
+-Java Runtime Environment (JRE) or Java Development Kit (JDK) 
+The system was tested under versions 1.6.0_37(oracle) and java-7-openjdk-i386
+
+
+-One of the following:
+---------------------
+- ant build tool
+        and 
+- ANDROID SDK version 2013.07.29 or later
+---------------------
+        OR
+---------------------
+
+ANDROID SDK ADT BUNDLE(includes eclipse) version 2013.07.29 or later.
+
+---------------------
+
+
+BUILD 
+=====
+COMMAND LINE BUILD
+------------------
+To build a project from command line, navigate to the root of the project directory (Factorization folder). Use Ant to compile your project in debug mode:
+>ant debug
+This creates your debug .apk file inside the project bin/ directory, named MainActivity-debug.apk.
+For building in release mode and other details,
+read
+http://developer.android.com/tools/building/building-cmdline.html. 
+http://developer.android.com/tools/publishing/app-signing.html
+
+ECLIPSE BUILD
+--------------
+IMPORT the project in Factorization folder (File->Import->Android->Existing Android Code Into Workspace)
+BUILD the project (Project->Build All) or set up automatic build (Project->Build automatically).
+
+
+INSTALL
+=======
+
+COMMAND LINE INSTALL
+--------------------
+Make sure that the paths to platform-tools/ and tools of android SDK are in your $PATH.
+In case you want to use emulator, open the AVD Manager and launch a virtual device
+Execute the android tool with the avd options:
+>android avd
+In the Virtual Devices view, select an AVD and click Start.
+Change your folder to the bin folder in the package
+Run the command:
+>adb install MainActivity.apk
+
+For a real devise, make sure it is connected and usb debugging is enabled 
+(more information: http://developer.android.com/tools/device.html#setting-up)
+Run the command  
+>adb -d install path/to/MainActivity.apk
+This will install the application into your device.
+
+ECLIPSE INSTALL
+
+Simply click run (Run->Run). It will install and run the application on your devise (if it is connected)
+or emulator.
+-------------------------------------------------------------------------------- 
+
+EXECUTE
+=======
+Locate Factorization icon in your android application menu and click on it to start the application.
+Enjoy!
+
+
