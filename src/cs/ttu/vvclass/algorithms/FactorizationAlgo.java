@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /**
  * Interface of strategy pattern for factorization.
+ * @author Evgenii Balai
+ * @author Cong Pu
  */
 public interface FactorizationAlgo {
   /**

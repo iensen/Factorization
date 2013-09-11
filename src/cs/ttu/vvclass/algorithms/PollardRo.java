@@ -9,6 +9,8 @@ import java.util.Random;
  * Some numbers in the resulting factorization may 
  * not be prime due to the wrong output of BigInteger.isProbablyPrime()
  * occurring with  probability 1/2^certainty
+ * @author Evgenii Balai
+ * @author Cong Pu
  */
 public class PollardRo implements FactorizationAlgo{
 
@@ -45,7 +47,6 @@ public class PollardRo implements FactorizationAlgo{
 		} while (value.compareTo(number)>=0);		
 		//save current number 
 		BigInteger buffer=value;
-	
 		BigInteger bufferNextIndex=BigInteger.valueOf(2);;
 		
 		BigInteger index=BigInteger.ONE;

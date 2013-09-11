@@ -6,6 +6,8 @@ package cs.ttu.vvclass.activities;
  * Used as a wrapper to pass parameters to FactorizationTask 
  * @param <FIRST> the type(class) of the first object
  * @param <SECOND> the type(class) of the seconds object
+ * @author Evgenii Balai
+ * @author Cong Pu
  */
 public class Pair<FIRST, SECOND> {
 

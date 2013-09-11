@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * factorization is not guaranteed to be correct . Some numbers in the resulting
  * factorization may not be prime due to the wrong output of
  * BigInteger.isProbablyPrime() occurring with probability 1/2^certainty
+ * @author Evgenii Balai
+ * @author Cong Pu
  */
 public class FermatMethod implements FactorizationAlgo {
 

@@ -25,6 +25,8 @@ import android.widget.Spinner;
 /**
  * Class implements main activity which will be running when the application
  * starts
+ * @author Cong Pu
+ * @author Evgenii Balai
  */
 
 public class MainActivity extends Activity implements OnClickListener {

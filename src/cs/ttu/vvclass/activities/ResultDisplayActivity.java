@@ -11,6 +11,8 @@ import ttu.cs.vvclass.R;
 
 /**
  * Class implements the activity which displays the factorization results
+ * @author Cong Pu
+ * @author Evgenii Balai
  */
 public class ResultDisplayActivity extends Activity implements OnClickListener {
 

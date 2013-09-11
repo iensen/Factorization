@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 /**
  * The class implements primitive division algorithm for number factorization
+ * @author Evgenii Balai
+ * @author Cong Pu
  */
 public class PrimitiveDivision implements FactorizationAlgo {
 

@@ -4,6 +4,8 @@ import android.util.Log;
 
 /**
  * A wrapper for the shared variables counting the number of running tasks
+ * @author Evgenii Balai	
+ * @author Cong Pu
  */
 public class TaskCounter {
 

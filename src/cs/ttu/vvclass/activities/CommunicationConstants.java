@@ -2,6 +2,8 @@ package cs.ttu.vvclass.activities;
 /**
  * Constants used for communicating between the main activity and the activity displaying the results.
  * result_i stands for the i-th number being factored
+ * @author Cong Pu
+ * @author Evgenii Balai
  */
 public class CommunicationConstants {
   public static final String [] extraDescriptions=

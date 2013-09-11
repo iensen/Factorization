@@ -11,6 +11,8 @@ import android.os.AsyncTask;
  * number The input parameter is of the form Pair<BigInteger,
  * FactorizationAlgo>, where BigInteger is the number which will be factored and
  * FactorizationAlgo is the algorithm selected by a user
+ * @author Evgenii Balai
+ * @author Cong Pu
  */
 class FactorizationTask extends
 		AsyncTask<Pair<BigInteger, FactorizationAlgo>, Void, Void> {
