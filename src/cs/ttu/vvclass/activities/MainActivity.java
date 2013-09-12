@@ -163,6 +163,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 
 		case R.id.exit_button:
+			// we know that this is not the right way to close this application
+			// it is just so happened that we do not have time to write the code
+			// for terminating all the threads and proper exit
 			android.os.Process.killProcess(android.os.Process.myPid());
 			break;
 
