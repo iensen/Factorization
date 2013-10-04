@@ -1,0 +1,8 @@
+package com.example.multithread;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+
+public interface OnFactorizationTaskCompleteListener {
+	public void onTaskComplete(String result);
+}

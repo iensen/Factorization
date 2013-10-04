@@ -1,0 +1,28 @@
+package com.example.multithread;
+
+import android.util.Log;
+
+public class TaskCounter {
+
+	private int runningThreads;
+
+	public TaskCounter() {
+		this.runningThreads = 0;
+	}
+	
+	public void addTask(FactorizationTask task)
+	{
+		runningThreads++;
+		Log.v("", "Task "+task.toString() +" is going to start");
+	}
+	
+	public void removeTask(FactorizationTask task)
+	{
+		Log.v("", "Task "+task.toString() +" was finished");
+		runningThreads--;
+		
+	}
+	
+	
+	
+}

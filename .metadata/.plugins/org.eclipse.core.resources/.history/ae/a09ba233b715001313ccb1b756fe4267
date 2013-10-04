@@ -1,0 +1,17 @@
+package com.example.multithread;
+
+/**
+ * Class implements runnable for running factorization task for a number
+ */
+public class FactorizationRunner implements Runnable {
+
+	@Override
+	public void run() {
+		// Move the current Thread into the background to reduce resource
+		// competition between the Runnable object's thread and the UI thread.
+		android.os.Process
+				.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+
+	}
+
+}

@@ -1,0 +1,215 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+ 	<TableLayout 
+        android:id="@+id/input_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dip"          
+        android:layout_margin="15dip"   
+        android:background="@drawable/background_div" 
+        android:stretchColumns="*" > 
+        <TableRow>
+			<TextView 
+            android:id="@+id/user_input_1"
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/user_input_1"
+            style="@style/normalText" />
+			<EditText 
+            android:id="@+id/number_1"
+            android:layout_width="155dip"
+           	android:layout_height="wrap_content"
+           	android:hint="@string/number_hint"
+            android:singleLine="true"
+            android:inputType="number"
+            android:maxLength="30"  
+            android:textSize="12sp"
+            android:gravity="center" /> 
+			<Spinner 
+            android:id="@+id/algorithm_1"
+            android:layout_width="20dip"
+            android:layout_height="wrap_content" 
+            android:entries="@array/algorithm_array"
+            android:textSize="12sp"
+            android:gravity="center" />
+		</TableRow>
+		
+        <TableRow>
+			<TextView 
+            android:id="@+id/user_input_2"
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/user_input_2"
+            android:textSize="12sp" />
+			<EditText 
+            android:id="@+id/number_2"
+            android:layout_width="155dip"
+           	android:layout_height="wrap_content"
+           	android:hint="@string/number_hint"
+            android:singleLine="true"
+            android:inputType="number"
+            android:maxLength="30"  
+            android:textSize="12sp"
+            android:gravity="center" /> 
+			<Spinner 
+            android:id="@+id/algorithm_2"
+            android:layout_width="20dip"
+            android:layout_height="wrap_content"
+            android:entries="@array/algorithm_array"
+            android:textSize="12sp"
+            android:gravity="center" />
+		</TableRow>
+		
+        <TableRow>
+			<TextView 
+            android:id="@+id/user_input_3"
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/user_input_3"
+            style="@style/normalText" />
+			<EditText 
+            android:id="@+id/number_3"
+            android:layout_width="155dip"
+           	android:layout_height="wrap_content"
+           	android:hint="@string/number_hint"
+            android:singleLine="true"
+            android:inputType="number"
+            android:maxLength="30"  
+            android:textSize="12sp"
+            android:gravity="center" /> 
+			<Spinner 
+            android:id="@+id/algorithm_3"
+            android:layout_width="20dip"
+            android:layout_height="wrap_content"
+            android:entries="@array/algorithm_array"
+            android:textSize="12sp"
+            android:gravity="center" />
+				 <ProgressBar
+			 android:id="@+id/pb_3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             style="@android:style/Widget.ProgressBar.Small"
+             android:layout_marginRight="5dp"
+             android:gravity="center"  />
+		</TableRow>
+		
+        <TableRow>
+			<TextView 
+            android:id="@+id/user_input_4"
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/user_input_4"
+            style="@style/normalText" />
+			<EditText 
+            android:id="@+id/number_4"
+            android:layout_width="155dip"
+           	android:layout_height="wrap_content"
+           	android:hint="@string/number_hint"
+            android:singleLine="true"
+            android:inputType="number"
+            android:maxLength="30"  
+            android:textSize="12sp"
+            android:gravity="center" /> 
+			<Spinner 
+            android:id="@+id/algorithm_4"
+            android:layout_width="20dip"
+            android:layout_height="wrap_content"
+            android:entries="@array/algorithm_array"
+            android:textSize="12sp"
+            android:gravity="center" />
+			 <ProgressBar
+			 android:id="@+id/pb_4"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             style="@android:style/Widget.ProgressBar.Small"
+             android:layout_marginRight="5dp"
+             android:gravity="center"  />
+		</TableRow>
+		
+        <TableRow>
+			<TextView 
+            android:id="@+id/user_input_5"
+            android:layout_width="1dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/user_input_5"
+            style="@style/normalText" />
+			<EditText 
+            android:id="@+id/number_5"
+            android:layout_width="155dip"
+           	android:layout_height="wrap_content"
+           	android:hint="@string/number_hint"
+            android:singleLine="true"
+            android:inputType="number"
+            android:maxLength="30"  
+            android:textSize="12sp"
+            android:gravity="center" /> 
+			<Spinner 
+            android:id="@+id/algorithm_5"
+            android:layout_width="20dip"
+            android:layout_height="wrap_content"
+            android:entries="@array/algorithm_array"
+            android:textSize="12sp"
+            android:gravity="center" />
+			 <ProgressBar
+			 android:id="@+id/pb_5"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             style="@android:style/Widget.ProgressBar.Small"
+             android:layout_marginRight="5dp"
+             android:gravity="center"  />
+			
+		</TableRow>
+			
+    </TableLayout>
+    
+ 	<TableLayout   
+   		android:id="@+id/button_operation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dip"          
+        android:layout_margin="15dip"   
+        android:background="@drawable/background_div" 
+        android:stretchColumns="*" >
+        
+ 	    <TableRow>
+            <Button   
+            android:id="@+id/reset_button"  
+            android:layout_width="1dip"  
+            android:layout_height="35dip"   
+            android:text="@string/reset_label"
+            android:background="@drawable/reset_button" />
+			<Button   
+            android:id="@+id/submit_button"  
+            android:layout_width="1dip"  
+            android:layout_height="35dip"   
+            android:text="@string/submit_label"
+            android:background="@drawable/submit_button" />
+			<Button   
+            android:id="@+id/exit_button"  
+            android:layout_width="1dip"  
+            android:layout_height="35dip"   
+            android:text="@string/exit_label" 
+            android:background="@drawable/exit_button" />
+        </TableRow>
+        
+ 	</TableLayout>
+ 	
+ 	<ImageView android:id="@+id/bottom_pic_logo"  
+            android:src="@drawable/bottom_pic"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_marginRight="25dp"  
+            android:layout_marginLeft="10dp"  
+            android:layout_marginBottom="25dp" /> 
+
+</LinearLayout>

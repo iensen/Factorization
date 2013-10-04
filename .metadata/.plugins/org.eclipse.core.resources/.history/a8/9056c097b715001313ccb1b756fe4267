@@ -1,0 +1,18 @@
+package com.example.multithread;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+
+import com.example.algorithms.FactorizationAlgo;
+
+import android.os.AsyncTask;
+
+class FactorizationTask extends AsyncTask<Pair<BigInteger,FactorizationAlgo>, Void, ArrayList<BigInteger> > {
+
+	private OnFactorizationTaskCompleteListener callback;
+	@Override
+	protected void doInBackground(
+			Pair<BigInteger, FactorizationAlgo>... arg0) {
+	  this.callback.onTaskComplete(arg0[0].second.run(arg0[0].first));	
+	}
+}

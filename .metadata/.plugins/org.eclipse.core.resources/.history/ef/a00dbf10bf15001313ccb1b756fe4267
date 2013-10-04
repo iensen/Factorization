@@ -1,0 +1,5 @@
+package com.example.multithread;
+
+public class ActivityCommunication {
+  public final String [] extraDescriptions= new String[]{"result_1","result_2",result_
+}
