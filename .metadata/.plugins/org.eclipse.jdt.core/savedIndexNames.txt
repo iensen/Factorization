@@ -1,3 +1,0 @@
-INDEX VERSION 1.126+/home/iensen/droid/.metadata/.plugins/org.eclipse.jdt.core
-1142838148.index
-1381949040.index
