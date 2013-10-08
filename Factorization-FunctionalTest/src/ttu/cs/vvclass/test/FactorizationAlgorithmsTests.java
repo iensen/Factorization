@@ -90,7 +90,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("7");
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("7");
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("7");
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("7");
 		int[] algorithms = new int[] { 1, 2, 3, 2, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("2", "3");
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("2", "2");
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("2", "2", "2");
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("3", "3");
 		int[] algorithms = new int[] { 3, 2, 1, 2, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -235,7 +235,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("11", "11");
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -254,7 +254,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("11", "11");
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -273,7 +273,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("11", "11");
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -292,7 +292,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("5", "3", "3", "3");
 		int[] algorithms = new int[] { 1, 3, 2, 1, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -311,7 +311,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("929");
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -330,7 +330,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("929");
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -349,7 +349,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("929");
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -368,7 +368,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("17");
 		int[] algorithms = new int[] { 3, 2, 1, 1, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -386,7 +386,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("5");
 		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -404,7 +404,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("3", "3");
 		int[] algorithms = new int[] { 3, 2, 1, 1, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -421,14 +421,14 @@ public class FactorizationAlgorithmsTests extends
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
 		// null means time -out!
-		expectedOutput[0] = null;
-		expectedOutput[1] = null;
-		expectedOutput[2] = null;
-		expectedOutput[3] = null;
-		expectedOutput[4] = null;
+		expectedOutput[0] = createBigIntegerList("707212484964685845810343064231");
+		expectedOutput[1] = createBigIntegerList("933828387973499888728986976561");
+		expectedOutput[2] = createBigIntegerList("582284249328080821278976360441");
+		expectedOutput[3] = createBigIntegerList("978905822172838099050079991099");
+		expectedOutput[4] = createBigIntegerList("666947371757872524008165984399");
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,true);
 	}
 
 	/**
@@ -451,7 +451,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("666947371757872524008165984399");
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -474,7 +474,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("666947371757872524008165984399");
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -490,14 +490,19 @@ public class FactorizationAlgorithmsTests extends
 				"412287866876406967025392736257");
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
-		expectedOutput[0] = null;
-		expectedOutput[1] = null;
-		expectedOutput[2] = null;
-		expectedOutput[3] = null;
-		expectedOutput[4] = null;
+		expectedOutput[0] = createBigIntegerList("415745718824941",
+				"415745718824899");
+		expectedOutput[1] = createBigIntegerList("929150221496459",
+				"643207578348757");
+		expectedOutput[2] = createBigIntegerList("643207578348781",
+				"643207578348757");
+		expectedOutput[3] = createBigIntegerList("717000060416053",
+				"717000060416027");
+		expectedOutput[4] = createBigIntegerList("642096462283061",
+				"642096462283037");
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,true);
 	}
 
 	/**
@@ -525,7 +530,7 @@ public class FactorizationAlgorithmsTests extends
 				"642096462283037");
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -541,14 +546,19 @@ public class FactorizationAlgorithmsTests extends
 				"412287866876406967025392736257");
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
-		expectedOutput[0] = null;
-		expectedOutput[1] = null;
-		expectedOutput[2] = null;
-		expectedOutput[3] = null;
-		expectedOutput[4] = null;
+		expectedOutput[0] = createBigIntegerList("415745718824941",
+				"415745718824899");
+		expectedOutput[1] = createBigIntegerList("929150221496459",
+				"643207578348757");
+		expectedOutput[2] = createBigIntegerList("643207578348781",
+				"643207578348757");
+		expectedOutput[3] = createBigIntegerList("717000060416053",
+				"717000060416027");
+		expectedOutput[4] = createBigIntegerList("642096462283061",
+				"642096462283037");
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,true);
 	}
 
 	/**
@@ -564,14 +574,34 @@ public class FactorizationAlgorithmsTests extends
 				"353160442933515000000000000000");
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
-		expectedOutput[0] = null;
-		expectedOutput[1] = null;
-		expectedOutput[2] = null;
-		expectedOutput[3] = null;
-		expectedOutput[4] = null;
+		expectedOutput[0] = createBigIntegerList("7", "5", "7", "2", "5", "3",
+				"2", "2", "5", "5", "3", "7", "3", "3", "3", "7", "2", "2",
+				"3", "2", "2", "5", "5", "2", "5", "2", "3", "5", "7", "3",
+				"5", "5", "2", "2", "5", "5", "2", "3", "5", "7", "2", "3",
+				"3", "5", "2", "7", "5", "3", "7", "3", "7", "5");
+		expectedOutput[1] = createBigIntegerList("7", "7", "5", "2", "5", "7",
+				"7", "2", "5", "2", "5", "5", "7", "7", "3", "5", "7", "5",
+				"3", "5", "3", "5", "2", "2", "2", "5", "3", "5", "2", "5",
+				"3", "5", "7", "3", "5", "7", "3", "7", "3", "3", "7", "5",
+				"2", "5", "7", "7", "5");
+		expectedOutput[2] = createBigIntegerList("3", "7", "5", "7", "2", "3",
+				"5", "3", "7", "7", "3", "5", "7", "3", "2", "7", "3", "3",
+				"2", "2", "2", "7", "7", "3", "2", "2", "3", "5", "5", "5",
+				"3", "3", "7", "5", "2", "3", "3", "2", "7", "2", "7", "3",
+				"2", "7", "2", "7", "7", "2", "5", "5", "7");
+		expectedOutput[3] = createBigIntegerList("3", "2", "7", "3", "7", "3",
+				"2", "3", "5", "3", "5", "3", "5", "2", "3", "7", "2", "5",
+				"2", "7", "2", "2", "3", "2", "2", "2", "3", "7", "5", "2",
+				"3", "5", "3", "3", "7", "2", "3", "2", "7", "3", "7", "5",
+				"7", "2", "7", "5", "5", "5", "2", "2", "7", "7", "7");
+		expectedOutput[4] = createBigIntegerList("7", "7", "5", "5", "7", "2",
+				"3", "5", "5", "2", "2", "3", "2", "2", "5", "7", "2", "2",
+				"2", "3", "5", "2", "7", "7", "5", "7", "2", "2", "7", "5",
+				"5", "2", "7", "5", "5", "3", "2", "5", "3", "5", "7", "2",
+				"5", "3", "2", "7", "5", "7", "5", "7");
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,true);
 	}
 
 	/**
@@ -587,14 +617,34 @@ public class FactorizationAlgorithmsTests extends
 				"353160442933515000000000000000");
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
-		expectedOutput[0] = null;
-		expectedOutput[1] = null;
-		expectedOutput[2] = null;
-		expectedOutput[3] = null;
-		expectedOutput[4] = null;
+		expectedOutput[0] = createBigIntegerList("7", "5", "7", "2", "5", "3",
+				"2", "2", "5", "5", "3", "7", "3", "3", "3", "7", "2", "2",
+				"3", "2", "2", "5", "5", "2", "5", "2", "3", "5", "7", "3",
+				"5", "5", "2", "2", "5", "5", "2", "3", "5", "7", "2", "3",
+				"3", "5", "2", "7", "5", "3", "7", "3", "7", "5");
+		expectedOutput[1] = createBigIntegerList("7", "7", "5", "2", "5", "7",
+				"7", "2", "5", "2", "5", "5", "7", "7", "3", "5", "7", "5",
+				"3", "5", "3", "5", "2", "2", "2", "5", "3", "5", "2", "5",
+				"3", "5", "7", "3", "5", "7", "3", "7", "3", "3", "7", "5",
+				"2", "5", "7", "7", "5");
+		expectedOutput[2] = createBigIntegerList("3", "7", "5", "7", "2", "3",
+				"5", "3", "7", "7", "3", "5", "7", "3", "2", "7", "3", "3",
+				"2", "2", "2", "7", "7", "3", "2", "2", "3", "5", "5", "5",
+				"3", "3", "7", "5", "2", "3", "3", "2", "7", "2", "7", "3",
+				"2", "7", "2", "7", "7", "2", "5", "5", "7");
+		expectedOutput[3] = createBigIntegerList("3", "2", "7", "3", "7", "3",
+				"2", "3", "5", "3", "5", "3", "5", "2", "3", "7", "2", "5",
+				"2", "7", "2", "2", "3", "2", "2", "2", "3", "7", "5", "2",
+				"3", "5", "3", "3", "7", "2", "3", "2", "7", "3", "7", "5",
+				"7", "2", "7", "5", "5", "5", "2", "2", "7", "7", "7");
+		expectedOutput[4] = createBigIntegerList("7", "7", "5", "5", "7", "2",
+				"3", "5", "5", "2", "2", "3", "2", "2", "5", "7", "2", "2",
+				"2", "3", "5", "2", "7", "7", "5", "7", "2", "2", "7", "5",
+				"5", "2", "7", "5", "5", "3", "2", "5", "3", "5", "7", "2",
+				"5", "3", "2", "7", "5", "7", "5", "7");
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,true);
 	}
 
 	/**
@@ -638,7 +688,7 @@ public class FactorizationAlgorithmsTests extends
 				"5", "3", "2", "7", "5", "7", "5", "7");
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,false);
 	}
 
 	/**
@@ -655,14 +705,14 @@ public class FactorizationAlgorithmsTests extends
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
 		// add actual numbers, accept time out
-		expectedOutput[0] = null;
-		expectedOutput[1] = null;
-		expectedOutput[2] = null;
-		expectedOutput[3] = null;
-		expectedOutput[4] = null;
+		expectedOutput[0] = createBigIntegerList("90211826186057295527","7393","824477");
+		expectedOutput[1] = createBigIntegerList("92309419743981367","529935235484");
+		expectedOutput[2] = createBigIntegerList("92309419743981367","529935235484");
+		expectedOutput[3] = createBigIntegerList("32603","6369436763","312968573501","3331");
+		expectedOutput[4] = createBigIntegerList("67","20239115885714879983","872863","107");
 		int[] algorithms = new int[] { 3, 2, 1, 2, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
+		assertSortedEqual(results, expectedOutput,true);
 	}
 
 	/**
@@ -673,10 +723,16 @@ public class FactorizationAlgorithmsTests extends
 	 *            first array
 	 * @param expectedOutput
 	 *            second array
+	 * @param allowTimeOut
+	 *         boolean variable, if being set to true, allows the execution
+	 *         to time-out
 	 */
 	private void assertSortedEqual(ArrayList<BigInteger>[] results,
-			ArrayList<BigInteger>[] expectedOutput) {
+			ArrayList<BigInteger>[] expectedOutput, boolean allowTimeOut) {
 		for (int i = 0; i < results.length; i++) {
+			if(allowTimeOut && results[i]==null) {
+				continue;
+			}
 			if (results[i] != null)
 				Collections.sort(results[i]);
 			if (expectedOutput[i] != null)
