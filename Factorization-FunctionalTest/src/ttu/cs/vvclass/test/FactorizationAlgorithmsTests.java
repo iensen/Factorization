@@ -61,7 +61,7 @@ public class FactorizationAlgorithmsTests extends
 	public void testEP2() {
 		BigInteger[] inputs = createBigIntegerArray("5", "15", "0", "23", "10");
 		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
-		final String errorMessage = "All the input numbers must be positive";
+		final String errorMessage = "The input numbers for factorization must be positive";
 		runInvalidInput(inputs, algorithms, errorMessage);
 	}
 

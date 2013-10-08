@@ -300,6 +300,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			} catch (NumberFormatException ex) {
 				showAlertDialog("You should input numbers into all the edit boxes");
 			}
+			catch (ZeroInputException ex) {
+				showAlertDialog(ex.getMessage());
+			}
 		}
 
 	}
@@ -336,12 +339,16 @@ public class MainActivity extends Activity implements OnClickListener {
 	/**
 	 * Parse the input into the edit boxes into the BigInteger array
 	 * @return parsing result
+	 * @throws ZeroInputException 
 	 * @throws a number format exception if one of the edit boxes does not contain a number 
 	 */
-	private BigInteger[] parseInputs() throws NumberFormatException {
+	private BigInteger[] parseInputs() throws NumberFormatException, ZeroInputException {
 		BigInteger[] integerInputs = new BigInteger[inputs.length];
 		for (int i = 0; i < inputs.length; i++) {
 			integerInputs[i] = new BigInteger(inputs[i].getText().toString());
+			if(integerInputs[i].equals(BigInteger.ZERO)) {
+				throw new ZeroInputException("The input numbers for factorization must be positive");
+			}
 		}
 		return integerInputs;
 	}
