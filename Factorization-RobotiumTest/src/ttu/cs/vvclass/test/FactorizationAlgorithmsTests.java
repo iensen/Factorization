@@ -552,7 +552,7 @@ public class FactorizationAlgorithmsTests extends
 	}
 
 	/**
-	 * Extreme Value Analysis test #9, composite numbers that are a product of
+	 * Extreme Value Analysis test #10, composite numbers that are a product of
 	 * many small primes , Primitive Division Algorithm
 	 */
 	public void testEVA9() {
@@ -564,75 +564,12 @@ public class FactorizationAlgorithmsTests extends
 				"353160442933515000000000000000");
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
-		expectedOutput[0] = createBigIntegerList("7", "5", "7", "2", "5", "3",
-				"2", "2", "5", "5", "3", "7", "3", "3", "3", "7", "2", "2",
-				"3", "2", "2", "5", "5", "2", "5", "2", "3", "5", "7", "3",
-				"5", "5", "2", "2", "5", "5", "2", "3", "5", "7", "2", "3",
-				"3", "5", "2", "7", "5", "3", "7", "3", "7", "5");
-		expectedOutput[1] = createBigIntegerList("7", "7", "5", "2", "5", "7",
-				"7", "2", "5", "2", "5", "5", "7", "7", "3", "5", "7", "5",
-				"3", "5", "3", "5", "2", "2", "2", "5", "3", "5", "2", "5",
-				"3", "5", "7", "3", "5", "7", "3", "7", "3", "3", "7", "5",
-				"2", "5", "7", "7", "5");
-		expectedOutput[2] = createBigIntegerList("3", "7", "5", "7", "2", "3",
-				"5", "3", "7", "7", "3", "5", "7", "3", "2", "7", "3", "3",
-				"2", "2", "2", "7", "7", "3", "2", "2", "3", "5", "5", "5",
-				"3", "3", "7", "5", "2", "3", "3", "2", "7", "2", "7", "3",
-				"2", "7", "2", "7", "7", "2", "5", "5", "7");
-		expectedOutput[3] = createBigIntegerList("3", "2", "7", "3", "7", "3",
-				"2", "3", "5", "3", "5", "3", "5", "2", "3", "7", "2", "5",
-				"2", "7", "2", "2", "3", "2", "2", "2", "3", "7", "5", "2",
-				"3", "5", "3", "3", "7", "2", "3", "2", "7", "3", "7", "5",
-				"7", "2", "7", "5", "5", "5", "2", "2", "7", "7", "7");
-		expectedOutput[4] = createBigIntegerList("7", "7", "5", "5", "7", "2",
-				"3", "5", "5", "2", "2", "3", "2", "2", "5", "7", "2", "2",
-				"2", "3", "5", "2", "7", "7", "5", "7", "2", "2", "7", "5",
-				"5", "2", "7", "5", "5", "3", "2", "5", "3", "5", "7", "2",
-				"5", "3", "2", "7", "5", "7", "5", "7");
-		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
-		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput);
-	}
-	
-	/**
-	 * Extreme Value Analysis test #10, composite numbers that are a product of
-	 * many small primes , Primitive Division Algorithm
-	 */
-	public void testEVA10() {
-		BigInteger[] inputs = createBigIntegerArray(
-				"160841709432652500000000000000",
-				"372473904656441601562500000000",
-				"363319032442408972272000000000",
-				"296586965259109365120000000000",
-				"353160442933515000000000000000");
-		@SuppressWarnings("unchecked")
-		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
-		expectedOutput[0] = createBigIntegerList("7", "5", "7", "2", "5", "3",
-				"2", "2", "5", "5", "3", "7", "3", "3", "3", "7", "2", "2",
-				"3", "2", "2", "5", "5", "2", "5", "2", "3", "5", "7", "3",
-				"5", "5", "2", "2", "5", "5", "2", "3", "5", "7", "2", "3",
-				"3", "5", "2", "7", "5", "3", "7", "3", "7", "5");
-		expectedOutput[1] = createBigIntegerList("7", "7", "5", "2", "5", "7",
-				"7", "2", "5", "2", "5", "5", "7", "7", "3", "5", "7", "5",
-				"3", "5", "3", "5", "2", "2", "2", "5", "3", "5", "2", "5",
-				"3", "5", "7", "3", "5", "7", "3", "7", "3", "3", "7", "5",
-				"2", "5", "7", "7", "5");
-		expectedOutput[2] = createBigIntegerList("3", "7", "5", "7", "2", "3",
-				"5", "3", "7", "7", "3", "5", "7", "3", "2", "7", "3", "3",
-				"2", "2", "2", "7", "7", "3", "2", "2", "3", "5", "5", "5",
-				"3", "3", "7", "5", "2", "3", "3", "2", "7", "2", "7", "3",
-				"2", "7", "2", "7", "7", "2", "5", "5", "7");
-		expectedOutput[3] = createBigIntegerList("3", "2", "7", "3", "7", "3",
-				"2", "3", "5", "3", "5", "3", "5", "2", "3", "7", "2", "5",
-				"2", "7", "2", "2", "3", "2", "2", "2", "3", "7", "5", "2",
-				"3", "5", "3", "3", "7", "2", "3", "2", "7", "3", "7", "5",
-				"7", "2", "7", "5", "5", "5", "2", "2", "7", "7", "7");
-		expectedOutput[4] = createBigIntegerList("7", "7", "5", "5", "7", "2",
-				"3", "5", "5", "2", "2", "3", "2", "2", "5", "7", "2", "2",
-				"2", "3", "5", "2", "7", "7", "5", "7", "2", "2", "7", "5",
-				"5", "2", "7", "5", "5", "3", "2", "5", "3", "5", "7", "2",
-				"5", "3", "2", "7", "5", "7", "5", "7");
-		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
+		expectedOutput[0] = null;
+		expectedOutput[1] = null;
+		expectedOutput[2] = null;
+		expectedOutput[3] = null;
+		expectedOutput[4] = null;
+		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput);
 	}
@@ -664,6 +601,7 @@ public class FactorizationAlgorithmsTests extends
 	 * Extreme Value Analysis test #10, composite numbers that are a product of
 	 * many small primes , Pollard-Rho Algorithm
 	 */
+
 	public void testEVA11() {
 		BigInteger[] inputs = createBigIntegerArray(
 				"160841709432652500000000000000",
@@ -673,12 +611,56 @@ public class FactorizationAlgorithmsTests extends
 				"353160442933515000000000000000");
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
+		expectedOutput[0] = createBigIntegerList("7", "5", "7", "2", "5", "3",
+				"2", "2", "5", "5", "3", "7", "3", "3", "3", "7", "2", "2",
+				"3", "2", "2", "5", "5", "2", "5", "2", "3", "5", "7", "3",
+				"5", "5", "2", "2", "5", "5", "2", "3", "5", "7", "2", "3",
+				"3", "5", "2", "7", "5", "3", "7", "3", "7", "5");
+		expectedOutput[1] = createBigIntegerList("7", "7", "5", "2", "5", "7",
+				"7", "2", "5", "2", "5", "5", "7", "7", "3", "5", "7", "5",
+				"3", "5", "3", "5", "2", "2", "2", "5", "3", "5", "2", "5",
+				"3", "5", "7", "3", "5", "7", "3", "7", "3", "3", "7", "5",
+				"2", "5", "7", "7", "5");
+		expectedOutput[2] = createBigIntegerList("3", "7", "5", "7", "2", "3",
+				"5", "3", "7", "7", "3", "5", "7", "3", "2", "7", "3", "3",
+				"2", "2", "2", "7", "7", "3", "2", "2", "3", "5", "5", "5",
+				"3", "3", "7", "5", "2", "3", "3", "2", "7", "2", "7", "3",
+				"2", "7", "2", "7", "7", "2", "5", "5", "7");
+		expectedOutput[3] = createBigIntegerList("3", "2", "7", "3", "7", "3",
+				"2", "3", "5", "3", "5", "3", "5", "2", "3", "7", "2", "5",
+				"2", "7", "2", "2", "3", "2", "2", "2", "3", "7", "5", "2",
+				"3", "5", "3", "3", "7", "2", "3", "2", "7", "3", "7", "5",
+				"7", "2", "7", "5", "5", "5", "2", "2", "7", "7", "7");
+		expectedOutput[4] = createBigIntegerList("7", "7", "5", "5", "7", "2",
+				"3", "5", "5", "2", "2", "3", "2", "2", "5", "7", "2", "2",
+				"2", "3", "5", "2", "7", "7", "5", "7", "2", "2", "7", "5",
+				"5", "2", "7", "5", "5", "3", "2", "5", "3", "5", "7", "2",
+				"5", "3", "2", "7", "5", "7", "5", "7");
+		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
+		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
+		assertSortedEqual(results, expectedOutput);
+	}
+
+	/**
+	 * Extreme Value Analysis test #12, random composite numbers consisting of
+	 * 30 digits
+	 */
+	public void testEVA12() {
+		BigInteger[] inputs = createBigIntegerArray(
+				"549873418025445696521276903947",
+				"489180140894458575387764210381",
+				"216488064302581628590413036959",
+				"245691505279186890176283925361",
+				"126647377709649845297644927601");
+		@SuppressWarnings("unchecked")
+		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
+		// add actual numbers, accept time out
 		expectedOutput[0] = null;
 		expectedOutput[1] = null;
 		expectedOutput[2] = null;
 		expectedOutput[3] = null;
 		expectedOutput[4] = null;
-		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
+		int[] algorithms = new int[] { 3, 2, 1, 2, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput);
 	}
@@ -695,8 +677,10 @@ public class FactorizationAlgorithmsTests extends
 	private void assertSortedEqual(ArrayList<BigInteger>[] results,
 			ArrayList<BigInteger>[] expectedOutput) {
 		for (int i = 0; i < results.length; i++) {
-			Collections.sort(results[i]);
-			Collections.sort(expectedOutput[i]);
+			if (results[i] != null)
+				Collections.sort(results[i]);
+			if (expectedOutput[i] != null)
+				Collections.sort(expectedOutput[i]);
 			assertEquals(results[i], expectedOutput[i]);
 		}
 	}

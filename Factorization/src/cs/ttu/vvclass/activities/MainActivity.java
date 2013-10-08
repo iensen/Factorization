@@ -124,9 +124,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		case 0:
 			return new PrimitiveDivision();
 		case 1:
-			return new PollardRo();
-		case 2:
 			return new FermatMethod();
+		case 2:
+			return new PollardRo();
 		default:
 			return null;
 		}
