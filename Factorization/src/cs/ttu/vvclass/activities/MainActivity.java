@@ -1,6 +1,11 @@
 package cs.ttu.vvclass.activities;
 
 import java.math.BigInteger;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import ttu.cs.vvclass.R;
 import cs.ttu.vvclass.algorithms.FactorizationAlgo;
 import cs.ttu.vvclass.algorithms.FermatMethod;
@@ -65,12 +70,13 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * Intent for starting result display activity 
 	 */
 	Intent final_results_intent;
-	
+
 	/** Called when the activity is first created. */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// initialize main window
+		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 
@@ -148,7 +154,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * background, i.e, not conflicting with the main GUI thread).
 	 */
 	FactorizationTask[] factorizationTasks;
-
+	
+	 
 	/**
 	 * Click event handler
 	 * 
@@ -230,6 +237,7 @@ public class MainActivity extends Activity implements OnClickListener {
 											// synchronization: show the result
 											// if and only if
 											// all the 5 threads were completed
+										
 											synchronized (taskCounter) {
 												if (taskCounter
 														.getRecievedTasksCount() == inputs.length
@@ -263,12 +271,29 @@ public class MainActivity extends Activity implements OnClickListener {
 					Pair<BigInteger, FactorizationAlgo> taskParams = new Pair<BigInteger, FactorizationAlgo>(
 							integerInputs[i], getAlgorithmById(algorithmId));
 
+					
+					// Create thread executor
+					
+					// create  the queue to use for holding tasks before they are executed. 
+					// this queue will hold only the Runnable tasks submitted by the execute method.
+					BlockingQueue<Runnable> waitingThreads =new LinkedBlockingQueue<Runnable>();
+					ThreadPoolExecutor executor =  new ThreadPoolExecutor(5,// number of core threads 
+							                                           5,// maximum number of threads
+							                                           0, // do not allow the threads to wait,
+							                                           TimeUnit.MILLISECONDS,
+							                                           waitingThreads);
                     // NOW RUN THE THREADS!
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 						// execute the threads on the pull executor
 						// to make them all run in parallel:
-						factorizationTasks[i].executeOnExecutor(
-								AsyncTask.THREAD_POOL_EXECUTOR, taskParams);
+						factorizationTasks[i].executeOnExecutor(executor, taskParams);
+						
+						
+						//factorizationTasks[i].execute(taskParams);
+						//factorizationTasks[i].executeOnExecutor(
+						//		AsyncTask.THREAD_POOL_EXECUTOR, taskParams);
+						
+						//factorizationTasks[i].doInBackground(taskParams);
 					} else {
 						// the parallel version of executing AsyncTasks
 						// was not supported
@@ -285,9 +310,13 @@ public class MainActivity extends Activity implements OnClickListener {
 						public void run() {
 							// stop the thread if it was timed out!
 							if (factorizationTasks[index].getStatus() == AsyncTask.Status.RUNNING)
+							{
 								factorizationTasks[index].completeTask();
-							// and hide the corresponding progress bar
-							runOnUiThread(new Runnable() {
+								factorizationTasks[index].cancel(true);
+							}
+							    
+						//	 and hide the corresponding progress bar
+						runOnUiThread(new Runnable() {
 								public void run() {
 									currentProgressBar
 											.setVisibility(View.INVISIBLE);
@@ -295,6 +324,7 @@ public class MainActivity extends Activity implements OnClickListener {
 							});
 						}
 					}, timeout);
+					
 
 				}
 			} catch (NumberFormatException ex) {

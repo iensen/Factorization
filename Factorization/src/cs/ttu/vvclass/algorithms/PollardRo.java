@@ -2,7 +2,10 @@ package cs.ttu.vvclass.algorithms;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
+
+
 /**
  * The class implements Pollard-Ro probabilistic algorithm for number factorization.
  * The resulting factorization is not guaranteed to be correct . 
@@ -39,21 +42,31 @@ public class PollardRo implements FactorizationAlgo{
 			result.add(number);
 		}
 		else {
-		BigInteger value;
-		//sample a random value uniformly distributed between 0 and n-1
-		Random randomGen=new Random();
-		do {
-		    value = new BigInteger(number.bitLength(), randomGen);
-		} while (value.compareTo(number)>=0);		
+		
+	    BigInteger value = null;
 		//save current number 
-		BigInteger buffer=value;
-		BigInteger bufferNextIndex=BigInteger.valueOf(2);;
+		BigInteger buffer = null;
+		BigInteger bufferNextIndex = null;
 		
 		BigInteger index=BigInteger.ONE;
+		final int minIteration=10;
+		int maxIteration=Math.max(minIteration,NumericUtils.SquareRootFloor(NumericUtils.SquareRootFloor(number)).intValue());
+		int curIteration=0;
+		BigInteger shift = null;
 		while(true) {
+		  ++curIteration;
+		  if(curIteration==maxIteration || curIteration==1) // reinitialize the algorithm!
+		  {
+			  value=getRandomNumber(number);
+			  curIteration=1;
+			  buffer=value;
+			  bufferNextIndex=BigInteger.valueOf(2);
+			  index=BigInteger.ONE;
+			  shift=getConstantShift(number);
+		  }
 		  index=index.add(BigInteger.ONE);
-		  value=(value.multiply(value).subtract(BigInteger.ONE)).mod(number);
-		  BigInteger gcd=GCD(buffer.subtract(value).abs(),number);
+		  value=(value.multiply(value).subtract(BigInteger.ONE).add(shift)).mod(number);
+		  BigInteger gcd=NumericUtils.GCD(buffer.subtract(value).abs(),number);
 		  if(!gcd.equals(number) && !gcd.equals(BigInteger.ONE)) {
 	       //we have non-primitive divisor
 		   result.addAll(run(gcd));
@@ -69,19 +82,35 @@ public class PollardRo implements FactorizationAlgo{
 		return result;
 	}
 	
-	/**
-	 * Compute greatest common divisor of two numbers
-	 * @param number1
-	 * @param number2
-	 * @return greatest common divisor
-	 */
-	private BigInteger GCD(BigInteger number1, BigInteger number2) {
-		if(number2.equals(BigInteger.ZERO))
-				return number1;
-			else
-				return GCD (number2, number1.mod(number2));
+	private BigInteger getRandomNumber(BigInteger upperLimit) {
+		
+		BigInteger value;
+		//sample a random value uniformly distributed between 0 and n-1
+		Random randomGen=new Random(new Date().getTime());
+		do {
+		    value = new BigInteger(upperLimit.bitLength(), randomGen);
+		} while (value.compareTo(upperLimit)>=0);	
+		
+		return value;
 	}
 	
+	private BigInteger getConstantShift(BigInteger upperLimit) {
+		
+		BigInteger value;
+		
+		// the values 0 and upperLimit-2 must be avoided!
+		
+		//sample a random value uniformly distributed between 0 and n-1
+		Random randomGen=new Random(new Date().getTime());
+		do {
+		    value = new BigInteger(upperLimit.bitLength(), randomGen);
+		} while (value.compareTo(upperLimit)>=0 && !value.equals(BigInteger.ZERO) && !value.equals(BigInteger.valueOf(2)));	
+		
+		return value;
+	}
+	
+	
+
 	
 
 }

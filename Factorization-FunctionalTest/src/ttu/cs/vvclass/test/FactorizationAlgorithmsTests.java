@@ -8,7 +8,9 @@ import java.util.Collections;
 import ttu.cs.vvclass.R;
 import com.jayway.android.robotium.solo.Solo;
 import cs.ttu.vvclass.activities.MainActivity;
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -41,14 +43,18 @@ public class FactorizationAlgorithmsTests extends
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		solo = new Solo(getInstrumentation(), getActivity());
+		   Intent i = new Intent();
+		    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		    setActivityIntent(i);
+		    solo = new Solo(getInstrumentation(), getActivity());
+	
 
 	}
 
 	/**
 	 * Equivalence partitioning test #1, only 4 numbers in the input
 	 */
-	public void testEP1() {
+	public void testEP1001() {
 		BigInteger[] inputs = createBigIntegerArray("1", "2", "3", "4");
 		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
 		final String errorMessage = "You should input numbers into all the edit boxes";
@@ -58,7 +64,7 @@ public class FactorizationAlgorithmsTests extends
 	/**
 	 * Equivalence partitioning test #2, 0 input
 	 */
-	public void testEP2() {
+	public void testEP1002() {
 		BigInteger[] inputs = createBigIntegerArray("5", "15", "0", "23", "10");
 		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
 		final String errorMessage = "The input numbers for factorization must be positive";
@@ -187,7 +193,7 @@ public class FactorizationAlgorithmsTests extends
 	 * Equivalence partitioning test #10, Single digit composite numbers,
 	 * Pollard-Rho Algorithm
 	 */
-	public void testEP10() {
+	public void testEPDESYAT() {
 		BigInteger[] inputs = createBigIntegerArray("4", "6", "8", "9", "8");
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
@@ -510,6 +516,7 @@ public class FactorizationAlgorithmsTests extends
 	 * two primes with a small difference, Fermat Method
 	 */
 	public void testEVA7() {
+		
 		BigInteger[] inputs = createBigIntegerArray(
 				"172844502721249440065613005959",
 				"863320134106909528879134574091",
@@ -521,13 +528,17 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[0] = createBigIntegerList("415745718824941",
 				"415745718824899");
 		expectedOutput[1] = createBigIntegerList("929150221496459",
-				"643207578348757");
+				"929150221496449");
 		expectedOutput[2] = createBigIntegerList("643207578348781",
 				"643207578348757");
 		expectedOutput[3] = createBigIntegerList("717000060416053",
 				"717000060416027");
 		expectedOutput[4] = createBigIntegerList("642096462283061",
 				"642096462283037");
+	     
+		
+		
+	     
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
@@ -608,7 +619,7 @@ public class FactorizationAlgorithmsTests extends
 	 * Extreme Value Analysis test #10, composite numbers that are a product of
 	 * many small primes , Fermat Method
 	 */
-	public void testEVA10() {
+	public void testEP1() {
 		BigInteger[] inputs = createBigIntegerArray(
 				"160841709432652500000000000000",
 				"372473904656441601562500000000",
@@ -652,7 +663,7 @@ public class FactorizationAlgorithmsTests extends
 	 * many small primes , Pollard-Rho Algorithm
 	 */
 
-	public void testEVA11() {
+	public void testEP10() {
 		BigInteger[] inputs = createBigIntegerArray(
 				"160841709432652500000000000000",
 				"372473904656441601562500000000",
@@ -806,6 +817,7 @@ public class FactorizationAlgorithmsTests extends
 	@Override
 	protected void tearDown() throws Exception {
 		solo.finishOpenedActivities();
+		backOutToHome();
 	}
 
 	/**
@@ -823,6 +835,12 @@ public class FactorizationAlgorithmsTests extends
 	private ArrayList<BigInteger>[] runValidInput(BigInteger[] inputs,
 			int[] algorithmUserIds) {
 
+		try {
+			setUp();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		// create links to edit boxes
 		EditText[] editBoxes = new EditText[] {
 				(EditText) solo.getView(R.id.number_1),
@@ -877,7 +895,9 @@ public class FactorizationAlgorithmsTests extends
 		}
 
 		// close the activities and return the result
+		solo.clickOnButton("Back");
 		solo.finishOpenedActivities();
+		
 		return result;
 	}
 
@@ -933,5 +953,16 @@ public class FactorizationAlgorithmsTests extends
 		// now, a alert box must appear, which the errorMessage on it
 		assertTrue("Could not find the dialog!", solo.searchText(errorMessage));
 		solo.finishOpenedActivities();
+	}
+	
+	private void backOutToHome() {
+	    boolean more = true;
+	    while(more) {
+	        try {
+	            getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
+	        } catch (SecurityException e) { // Done, at Home.
+	            more = false;
+	        }
+	    }
 	}
 }

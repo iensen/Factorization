@@ -3,6 +3,8 @@ package cs.ttu.vvclass.algorithms;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
+
+
 /**
  * The class implements Fermat method for number factorization. The resulting
  * factorization is not guaranteed to be correct . Some numbers in the resulting
@@ -44,14 +46,16 @@ public class FermatMethod implements FactorizationAlgo {
 			result.addAll(run(number.shiftRight(1)));
 		} else {
 			// we search for two numbers A and B such that A^2-B^2=N.
-			BigInteger A = SquareRootFloor(number);
+			BigInteger A = NumericUtils.SquareRootFloor(number);
 			BigInteger B = A.multiply(A).subtract(number);
+			
 			while (!isPerfectSquare(B)) {
 				A = A.add(BigInteger.ONE);
 				B = A.multiply(A).subtract(number);
 			}
-
+            B=NumericUtils.SquareRootFloor(B);
 			// given A^2-B^2=N, we can write N=(A-B)*(A+B), so A-B is a divisor
+
 			result.addAll(run(A.subtract(B)));
 			result.addAll(run(A.add(B)));
 		}
@@ -63,33 +67,10 @@ public class FermatMethod implements FactorizationAlgo {
 	 * Check if the number is a perfect square
 	 */
 	private boolean isPerfectSquare(BigInteger number) {
-		BigInteger floorRoot = SquareRootFloor(number);
+		BigInteger floorRoot = NumericUtils.SquareRootFloor(number);
 		return floorRoot.multiply(floorRoot).equals(number);
 	}
 
-	/**
-	 * Compute square root of number n. If the number is not a perfect square,
-	 * return the floor(sqrt(number))
-	 * 
-	 * @param number
-	 *            - input number
-	 * @return BigInteger
-	 */
-	private BigInteger SquareRootFloor(BigInteger number) {
-		BigInteger low = BigInteger.ZERO;
-		BigInteger high = number.add(BigInteger.ONE);
 
-		// use binary search to find two numbers low and high, such that
-		// low*low<=number<high*high
-		while (high.subtract(low).compareTo(BigInteger.ONE) > 0) {
-			BigInteger mid = low.add(high).shiftRight(1);
-			if (mid.multiply(mid).compareTo(number) <= 0) {
-				low = mid;
-			} else {
-				high = mid;
-			}
-		}
-		return low;
-	}
 
 }

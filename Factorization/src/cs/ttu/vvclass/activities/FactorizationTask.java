@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import cs.ttu.vvclass.algorithms.FactorizationAlgo;
 import android.os.AsyncTask;
 
+
 /**
  * The class implements AsyncTasks(Threads) which are used for factoring a
  * number The input parameter is of the form Pair<BigInteger,
@@ -58,10 +59,10 @@ class FactorizationTask extends
 	protected Void doInBackground(Pair<BigInteger, FactorizationAlgo>... arg0) {
 
 		// First, increase the number of running threads in the shared variable
-
 		synchronized (taskCounter) {
 			taskCounter.addTask("Thread " + Thread.currentThread().getId()
 					+ ". Starting factorization: " + arg0[0].first);
+
 		}
 
 		// DO THE FACTORIZATION
@@ -83,6 +84,7 @@ class FactorizationTask extends
 			if (!taskComplete) {
 				// reduce the number of running threads in the shared variable
 				// by one
+				
 				taskCounter.removeTask("Thread "
 						+ Thread.currentThread().getId()
 						+ ". factorization found: " + factorizationResult);
