@@ -54,7 +54,7 @@ public class FactorizationAlgorithmsTests extends
 	/**
 	 * Equivalence partitioning test #1, only 4 numbers in the input
 	 */
-	public void testEP1001() {
+	public void testEP1() {
 		BigInteger[] inputs = createBigIntegerArray("1", "2", "3", "4");
 		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
 		final String errorMessage = "You should input numbers into all the edit boxes";
@@ -64,7 +64,7 @@ public class FactorizationAlgorithmsTests extends
 	/**
 	 * Equivalence partitioning test #2, 0 input
 	 */
-	public void testEP1002() {
+	public void testEP2() {
 		BigInteger[] inputs = createBigIntegerArray("5", "15", "0", "23", "10");
 		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
 		final String errorMessage = "The input numbers for factorization must be positive";
@@ -193,7 +193,7 @@ public class FactorizationAlgorithmsTests extends
 	 * Equivalence partitioning test #10, Single digit composite numbers,
 	 * Pollard-Rho Algorithm
 	 */
-	public void testEPDESYAT() {
+	public void testEP10() {
 		BigInteger[] inputs = createBigIntegerArray("4", "6", "8", "9", "8");
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
@@ -619,7 +619,7 @@ public class FactorizationAlgorithmsTests extends
 	 * Extreme Value Analysis test #10, composite numbers that are a product of
 	 * many small primes , Fermat Method
 	 */
-	public void testEP1() {
+	public void testEVA10() {
 		BigInteger[] inputs = createBigIntegerArray(
 				"160841709432652500000000000000",
 				"372473904656441601562500000000",
@@ -663,7 +663,7 @@ public class FactorizationAlgorithmsTests extends
 	 * many small primes , Pollard-Rho Algorithm
 	 */
 
-	public void testEP10() {
+	public void testEVA11() {
 		BigInteger[] inputs = createBigIntegerArray(
 				"160841709432652500000000000000",
 				"372473904656441601562500000000",
@@ -817,7 +817,7 @@ public class FactorizationAlgorithmsTests extends
 	@Override
 	protected void tearDown() throws Exception {
 		solo.finishOpenedActivities();
-		backOutToHome();
+
 	}
 
 	/**
@@ -895,7 +895,6 @@ public class FactorizationAlgorithmsTests extends
 		}
 
 		// close the activities and return the result
-		solo.clickOnButton("Back");
 		solo.finishOpenedActivities();
 		
 		return result;
@@ -955,14 +954,5 @@ public class FactorizationAlgorithmsTests extends
 		solo.finishOpenedActivities();
 	}
 	
-	private void backOutToHome() {
-	    boolean more = true;
-	    while(more) {
-	        try {
-	            getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
-	        } catch (SecurityException e) { // Done, at Home.
-	            more = false;
-	        }
-	    }
-	}
+
 }
