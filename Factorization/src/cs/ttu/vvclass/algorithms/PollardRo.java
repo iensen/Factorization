@@ -92,6 +92,7 @@ public class PollardRo implements FactorizationAlgo{
 		} while (value.compareTo(upperLimit)>=0);	
 		
 		return value;
+
 	}
 	
 	private BigInteger getConstantShift(BigInteger upperLimit) {
