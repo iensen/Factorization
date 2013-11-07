@@ -954,5 +954,5 @@ public class FactorizationAlgorithmsTests extends
 		solo.finishOpenedActivities();
 	}
 	
-
+	
 }

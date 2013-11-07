@@ -112,6 +112,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				(ProgressBar) findViewById(R.id.pb_3),
 				(ProgressBar) findViewById(R.id.pb_4),
 				(ProgressBar) findViewById(R.id.pb_5) };
+		
 		// all progress bars are hidden initially
 		for (ProgressBar progressBar : progressBars) {
 			progressBar.setVisibility(View.INVISIBLE);
