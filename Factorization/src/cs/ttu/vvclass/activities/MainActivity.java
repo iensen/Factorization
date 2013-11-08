@@ -278,7 +278,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					// create  the queue to use for holding tasks before they are executed. 
 					// this queue will hold only the Runnable tasks submitted by the execute method.
 					BlockingQueue<Runnable> waitingThreads =new LinkedBlockingQueue<Runnable>();
-					ThreadPoolExecutor executor =  new ThreadPoolExecutor(5,// number of core threads 
+					final ThreadPoolExecutor executor =  new ThreadPoolExecutor(5,// number of core threads 
 							                                           5,// maximum number of threads
 							                                           0, // do not allow the threads to wait,
 							                                           TimeUnit.MILLISECONDS,
@@ -314,6 +314,8 @@ public class MainActivity extends Activity implements OnClickListener {
 							{
 								factorizationTasks[index].completeTask();
 								factorizationTasks[index].cancel(true);
+								executor.shutdownNow();
+							
 							}
 							    
 						//	 and hide the corresponding progress bar

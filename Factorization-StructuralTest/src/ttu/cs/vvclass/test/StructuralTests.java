@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import ttu.cs.vvclass.R;
+
 import com.jayway.android.robotium.solo.Solo;
+
 import cs.ttu.vvclass.activities.MainActivity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
@@ -14,14 +16,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 /**
- * This class contains black box tests of Factorization APP using robotium tool
+ * This class contains structural tests of Factorization APP that 
+ * were build using robotium tool
  * 
  * @author Evgenii Balai
  * 
  */
-public class FactorizationAlgorithmsTests extends
+public class StructuralTests extends
 		ActivityInstrumentationTestCase2<MainActivity> {
 
 	/* Object for communicating with robotium */
@@ -30,7 +32,7 @@ public class FactorizationAlgorithmsTests extends
 	/*
 	 * Constructor
 	 */
-	public FactorizationAlgorithmsTests() {
+	public StructuralTests() {
 		// pass the class of the main activity
 		super(MainActivity.class);
 	}
@@ -49,7 +51,243 @@ public class FactorizationAlgorithmsTests extends
 	
 
 	}
+	/**
+	 * Use case 1 Scenario 1 test
+	 */
+	public void testU11() {
+		BigInteger[] inputs = createBigIntegerArray("1", "2");
+		inputDataToEditBoxes(inputs);
+		BigInteger[] actual = getDataFromEditBoxes();
+		
+		// check that the first two edit boxes contain same numbers as the numbers that were entered
+		for(int i=0;i<inputs.length;i++) {
+			assertEquals(inputs[i], actual[i]);
+		}
+		for(int i=inputs.length;i<actual.length;i++) {
+			assertEquals(actual[i],null);
+		}	
+		 solo.goBack(); 
+	}
+	
+	/**
+	 * Use case 1 Scenario 2 test
+	 */
+	public void testU12() {
+	
+		EditText[] editBoxes = new EditText[] {
+				(EditText) solo.getView(R.id.number_1),
+				(EditText) solo.getView(R.id.number_2)};
+	   
+		solo.enterText(editBoxes[0],"a");
+		solo.enterText(editBoxes[0],"b");
+			
+		BigInteger[] actual = getDataFromEditBoxes();
 
+		for(int i=0;i<actual.length;i++) {
+			assertEquals(actual[i],null);
+		}	
+		 solo.goBack(); 
+	}
+	
+	/**
+	 * Use case 1 Scenario 3 test
+	 */
+	public void testU13() {
+			BigInteger[] inputs = createBigIntegerArray("1", "2","3","4","5");
+			inputDataToEditBoxes(inputs);
+			BigInteger[] actual = getDataFromEditBoxes();		
+			// check that the first two edit boxes contain same numbers as the numbers that were entered
+			for(int i=0;i<inputs.length;i++) {
+				assertEquals(inputs[i], actual[i]);
+			}
+			 solo.goBack(); 
+	
+	}
+	
+
+	/**
+	 * Use case 2 Scenario 1 test
+	 */
+	public void testU21() {
+		BigInteger[] inputs = createBigIntegerArray("1", "2", "0", "4", "5");
+		int[] algorithms = new int[] { 1, 2, 3, 1, 3 };
+		final String errorMessage = "The input numbers for factorization must be positive";
+		runInvalidInput(inputs, algorithms, errorMessage);
+		 solo.goBack(); 
+	}
+	
+
+	/**
+	 * Use case 2 Scenario 2 test
+	 */
+	public void testU22() {
+		BigInteger[] inputs = createBigIntegerArray("1", "2", "3", "4", "5");
+		int[] algorithms = new int[] { 1, 2, 3, 2, 3 };
+		@SuppressWarnings("unchecked")
+		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
+		expectedOutput[0] = createBigIntegerList("1");
+		expectedOutput[1] = createBigIntegerList("2");
+		expectedOutput[2] = createBigIntegerList("3");
+		expectedOutput[3] = createBigIntegerList("2","2");
+		expectedOutput[4] = createBigIntegerList("5");
+		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
+		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
+	}
+	
+	/**
+	 * Use case 3 Scenario 1 test
+	 */
+	public void testU31() {
+		BigInteger[] inputs = createBigIntegerArray("863320134106909528879134574091","1","2","4","6");
+		int[] algorithms = new int[] { 1, 2, 3, 2, 3 };
+	    inputDataToEditBoxes(inputs);
+        selectAlgorithms(algorithms);
+        // click on submit and wait until the result appear
+        solo.clickOnButton("Submit");
+        solo.clickOnButton("Reset");
+        solo.sleep(1000);
+		ensureEmptyness();
+		 solo.goBack(); 
+	}
+	
+	/**
+	 * Use case 3 Scenario 2 test
+	 */
+	public void testU32() {
+		BigInteger[] inputs = createBigIntegerArray("863320134106909528879134574091","1","2","4","6");
+		int[] algorithms = new int[] { 1, 2, 3, 2, 3 };
+	    inputDataToEditBoxes(inputs);
+        selectAlgorithms(algorithms);
+        // click on submit and wait until the result appear
+
+        solo.clickOnButton("Reset"); solo.sleep(1000);
+		ensureEmptyness();
+		 solo.goBack(); 
+	}
+	
+	/**
+	 * Use case 4 Scenario 1 test
+	 */
+	public void testU41() {
+		BigInteger[] inputs = createBigIntegerArray("863320134106909528879134574091","1","2","4","6");
+		int[] algorithms = new int[] { 1, 2, 3, 2, 3 };
+	    inputDataToEditBoxes(inputs);
+        selectAlgorithms(algorithms);
+        solo.finishOpenedActivities();
+        solo.goBack(); 
+	}
+	
+	/**
+	 * State machine  Scenario 1 
+	 */
+	public void testSS1() {
+		BigInteger[] inputs = createBigIntegerArray("1","2","3","4","5");
+		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
+	    inputDataToEditBoxes(inputs);
+	    solo.clickOnButton("Reset");
+	    solo.sleep(1000);
+		ensureEmptyness();
+        //selectAlgorithms(algorithms);
+		 solo.goBack(); 
+	}
+	
+	/**
+	 * State machine  Scenario 2 
+	 */
+	public void testSS2() {
+		BigInteger[] inputs = createBigIntegerArray("1","2","3","4","5");
+		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
+
+	    selectAlgorithms(algorithms);
+	    solo.clickOnButton("Reset");
+	    solo.sleep(1000);
+		ensureEmptyness();
+		 solo.goBack(); 
+      
+	}
+	
+	/**
+	 * State machine  Scenario 3 
+	 */
+	public void testSS3() {
+		BigInteger[] inputs = createBigIntegerArray("1","2","3","4","5");
+		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
+	    inputDataToEditBoxes(inputs);
+	    selectAlgorithms(algorithms);
+	    solo.clickOnButton("Reset");
+	    solo.sleep(1000);
+		ensureEmptyness();
+		 solo.goBack(); 
+      
+	}
+	
+	
+	/**
+	 * State machine  Scenario 4 
+	 */
+	public void testSS4() {
+		BigInteger[] inputs = createBigIntegerArray("1","2","3","4","5");
+		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
+	    selectAlgorithms(algorithms);
+	    inputDataToEditBoxes(inputs);
+	    solo.clickOnButton("Reset");
+	    solo.sleep(1000);
+		ensureEmptyness();
+		 solo.goBack(); 
+      
+	}
+	
+	/**
+	 * State machine  Scenario 5 
+	 */
+	public void testSS5() {
+		BigInteger[] inputs = createBigIntegerArray("863320134106909528879134574091","2","3","4","5");
+		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
+	    selectAlgorithms(algorithms);
+	    inputDataToEditBoxes(inputs);
+	    solo.clickOnButton("Submit");
+	    solo.clickOnButton("Reset");
+	    solo.sleep(1000);
+		ensureEmptyness();
+		 solo.goBack(); 
+      
+	}
+	
+	/**
+	 * State machine  Scenario 6 
+	 */
+	public void testSS6() {
+		BigInteger[] inputs = createBigIntegerArray("1","2","3","4","5");
+		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
+	    selectAlgorithms(algorithms);
+	    inputDataToEditBoxes(inputs);
+	    solo.clickOnButton("Submit");
+	    assertTrue(solo.waitForActivity("ResultDisplayActivity", 35000));
+	    solo.clickOnButton("Go Back");
+		ensureEmptyness();
+		 solo.goBack(); 
+      
+	}
+	
+	/**
+	 * State machine based on the shared object
+	 */
+	public void testSSO() {
+		BigInteger[] inputs = createBigIntegerArray("1", "2", "3", "4", "5");
+		int[] algorithms = new int[] { 1, 2, 3, 2, 3 };
+		@SuppressWarnings("unchecked")
+		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
+		expectedOutput[0] = createBigIntegerList("1");
+		expectedOutput[1] = createBigIntegerList("2");
+		expectedOutput[2] = createBigIntegerList("3");
+		expectedOutput[3] = createBigIntegerList("2","2");
+		expectedOutput[4] = createBigIntegerList("5");
+		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
+		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
+	}
+	
 	/**
 	 * Equivalence partitioning test #1, only 4 numbers in the input
 	 */
@@ -58,6 +296,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
 		final String errorMessage = "You should input numbers into all the edit boxes";
 		runInvalidInput(inputs, algorithms, errorMessage);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -68,6 +307,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
 		final String errorMessage = "The input numbers for factorization must be positive";
 		runInvalidInput(inputs, algorithms, errorMessage);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -78,6 +318,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
 		final String errorMessage = "You should input numbers into all the edit boxes";
 		runInvalidInput(inputs, algorithms, errorMessage);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -96,6 +337,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -114,6 +356,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -131,7 +374,7 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("7");
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput,false);
+		assertSortedEqual(results, expectedOutput,false); solo.goBack(); 
 	}
 
 	/**
@@ -150,6 +393,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 2, 3, 2, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -168,6 +412,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -186,6 +431,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -204,6 +450,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -222,6 +469,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 3, 2, 1, 2, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -241,6 +489,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -260,6 +509,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -279,6 +529,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -298,6 +549,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 3, 2, 1, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -317,6 +569,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -336,6 +589,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -355,6 +609,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -374,6 +629,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 3, 2, 1, 1, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -392,6 +648,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 2, 3, 1, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -410,6 +667,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 3, 2, 1, 1, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -434,6 +692,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,true);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -457,6 +716,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,false);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -479,7 +739,8 @@ public class FactorizationAlgorithmsTests extends
 		expectedOutput[4] = createBigIntegerList("666947371757872524008165984399");
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput,false);
+		assertSortedEqual(results, expectedOutput,true);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -508,6 +769,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,true);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -540,7 +802,8 @@ public class FactorizationAlgorithmsTests extends
 	     
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput,false);
+		assertSortedEqual(results, expectedOutput,true);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -569,6 +832,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,true);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -612,6 +876,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 1, 1, 1, 1, 1 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,true);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -655,6 +920,7 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 2, 2, 2, 2, 2 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,true);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -664,41 +930,42 @@ public class FactorizationAlgorithmsTests extends
 
 	public void testEVA11() {
 		BigInteger[] inputs = createBigIntegerArray(
-				"160841709432652500000000000000",
-				"372473904656441601562500000000",
-				"363319032442408972272000000000",
-				"296586965259109365120000000000",
-				"353160442933515000000000000000");
+				"1608417094326525000000",
+				"3724739046564416015625",
+				"3633190324424089722720",
+				"2965869652591093651200",
+				"3531604429335150000000");
 		@SuppressWarnings("unchecked")
 		ArrayList<BigInteger> expectedOutput[] = new ArrayList[inputs.length];
-		expectedOutput[0] = createBigIntegerList("7", "5", "7", "2", "5", "3",
-				"2", "2", "5", "5", "3", "7", "3", "3", "3", "7", "2", "2",
-				"3", "2", "2", "5", "5", "2", "5", "2", "3", "5", "7", "3",
-				"5", "5", "2", "2", "5", "5", "2", "3", "5", "7", "2", "3",
+		expectedOutput[0] = createBigIntegerList("7", "5", "7", "3",
+				"3", "7", "3", "3", "3", "7", 
+				"3", "2", "3", "5", "7", "3",
+				 "2", "2", "5", "5", "2", "3", "5", "7", "2", "3",
 				"3", "5", "2", "7", "5", "3", "7", "3", "7", "5");
-		expectedOutput[1] = createBigIntegerList("7", "7", "5", "2", "5", "7",
-				"7", "2", "5", "2", "5", "5", "7", "7", "3", "5", "7", "5",
-				"3", "5", "3", "5", "2", "2", "2", "5", "3", "5", "2", "5",
-				"3", "5", "7", "3", "5", "7", "3", "7", "3", "3", "7", "5",
-				"2", "5", "7", "7", "5");
-		expectedOutput[2] = createBigIntegerList("3", "7", "5", "7", "2", "3",
-				"5", "3", "7", "7", "3", "5", "7", "3", "2", "7", "3", "3",
-				"2", "2", "2", "7", "7", "3", "2", "2", "3", "5", "5", "5",
-				"3", "3", "7", "5", "2", "3", "3", "2", "7", "2", "7", "3",
-				"2", "7", "2", "7", "7", "2", "5", "5", "7");
-		expectedOutput[3] = createBigIntegerList("3", "2", "7", "3", "7", "3",
-				"2", "3", "5", "3", "5", "3", "5", "2", "3", "7", "2", "5",
-				"2", "7", "2", "2", "3", "2", "2", "2", "3", "7", "5", "2",
-				"3", "5", "3", "3", "7", "2", "3", "2", "7", "3", "7", "5",
-				"7", "2", "7", "5", "5", "5", "2", "2", "7", "7", "7");
-		expectedOutput[4] = createBigIntegerList("7", "7", "5", "5", "7", "2",
-				"3", "5", "5", "2", "2", "3", "2", "2", "5", "7", "2", "2",
-				"2", "3", "5", "2", "7", "7", "5", "7", "2", "2", "7", "5",
-				"5", "2", "7", "5", "5", "3", "2", "5", "3", "5", "7", "2",
-				"5", "3", "2", "7", "5", "7", "5", "7");
+		expectedOutput[1] = createBigIntegerList("7", "7",  "7",
+				"7",  "7", "7", "3",  "7",
+				"3", "5", "3", "5",  "3", "5",
+				"3", "5", "7", "3", "5","5","5", "7", "3", "7", "3", "3", "7", "5",
+			    "5", "7", "7");
+		expectedOutput[2] = createBigIntegerList("3", "7", "7", "3",
+				"3", "7", "7", "3", "7", "3", "2", "7", "3", "3",
+				"7", "7", "3", "2", "2", "3",  "5", 
+				"3", "3", "7",  "2", "3", "3", "7", "7", "3",
+				 "7","7", "7", "2",  "7");
+		expectedOutput[3] = createBigIntegerList("3", "7", "3", "7", "3",
+			 "3",  "3",  "3",  "3", "7", 
+				 "7",   "3",  "2", "2", "3", "7", "5", "2",
+				"3",  "3", "3", "7", "2", "3", "2", "7", "3", "7", "5",
+				"7", "2", "7",   "2", "2", "7", "7", "7");
+		expectedOutput[4] = createBigIntegerList("7", "7",  "7",
+				"3",   "3", "5", "7", 
+				 "3", "5", "2", "7", "7", "5", "7", "2", "2", "7", 
+				"5", "2", "7", "5",  "3", "2", "3", "5", "7", "2",
+				"5", "3", "2", "7", "7", "5", "7");
 		int[] algorithms = new int[] { 3, 3, 3, 3, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
-		assertSortedEqual(results, expectedOutput,false);
+		assertSortedEqual(results, expectedOutput,true);
+		 solo.goBack(); 
 	}
 
 	/**
@@ -723,8 +990,29 @@ public class FactorizationAlgorithmsTests extends
 		int[] algorithms = new int[] { 3, 2, 1, 2, 3 };
 		ArrayList<BigInteger>[] results = runValidInput(inputs, algorithms);
 		assertSortedEqual(results, expectedOutput,true);
+	   solo.goBack(); 
 	}
 
+	
+	
+	
+	/**
+	 * check if all the editboxes are empty 
+	 */
+	private void ensureEmptyness() {
+		// create links to edit boxes
+				EditText[] editBoxes = new EditText[] {
+						(EditText) solo.getView(R.id.number_1),
+						(EditText) solo.getView(R.id.number_2),
+						(EditText) solo.getView(R.id.number_3),
+						(EditText) solo.getView(R.id.number_4),
+						(EditText) solo.getView(R.id.number_5) };
+
+				// enter the numbers into the editboxes
+				for (int i = 0; i < editBoxes.length; i++) {
+					assertEquals(editBoxes[i].getText().toString(), "");
+				}
+	}
 	/**
 	 * Check if two arrays contains the same numbers (not necessarily in the
 	 * same order)
@@ -749,25 +1037,14 @@ public class FactorizationAlgorithmsTests extends
 				Collections.sort(expectedOutput[i]);
 			assertEquals(results[i], expectedOutput[i]);
 		}
-	}
-
-	/**
-	 * Create an array of BigInteger from a number of string arguments given in
-	 * arg
-	 * 
-	 * @param arg
-	 *            array of strings
-	 * @return array of bigIntegers created from arg If arg[i]=Null, result[i]
-	 *         is also null
-	 */
-	private BigInteger[] createBigIntegerArray(String... arg) {
-		BigInteger[] result = new BigInteger[arg.length];
-		for (int i = 0; i < arg.length; i++) {
-			result[i] = new BigInteger(arg[i]);
+		if(allowTimeOut) {
+			solo.sleep(30000);
+		} else {
+			solo.sleep(5000);
 		}
-		return result;
-
 	}
+
+
 
 	/**
 	 * Create an ArrayList of BigInteger from a number of string arguments given
@@ -807,7 +1084,6 @@ public class FactorizationAlgorithmsTests extends
 		}
 
 		return true;
-
 	}
 
 	/**
@@ -815,6 +1091,7 @@ public class FactorizationAlgorithmsTests extends
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		solo.finishOpenedActivities();
 
 	}
@@ -854,17 +1131,7 @@ public class FactorizationAlgorithmsTests extends
 			solo.enterText(editBoxes[i], inputs[i].toString());
 		}
 
-		// select algorithms in the spinners
-		for (int i = 0; i < algorithmUserIds.length; i++) {
-			// 0 is the first spinner in the layout
-			View view1 = solo.getView(Spinner.class, i);
-			solo.clickOnView(view1);
-			solo.scrollToTop(); // I put this in here so that it always keeps
-								// the list at start
-			// select the 10th item in the spinner
-			solo.clickOnView(solo.getView(TextView.class,
-					algorithmUserIds[i] - 1));
-		}
+		selectAlgorithms(algorithmUserIds);
 
 		// click on submit and wait until the result appear
 		solo.clickOnButton("Submit");
@@ -899,6 +1166,94 @@ public class FactorizationAlgorithmsTests extends
 		return result;
 	}
 
+	private void selectAlgorithms(int[] algorithmUserIds) {
+		// select algorithms in the spinners
+		for (int i = 0; i < algorithmUserIds.length; i++) {
+			// 0 is the first spinner in the layout
+			View view1 = solo.getView(Spinner.class, i);
+			solo.clickOnView(view1);
+			solo.sleep(1000);
+			solo.scrollToTop(); // I put this in here so that it always keeps
+								// the list at start
+			// select the 10th item in the spinner
+			solo.clickOnView(solo.getView(TextView.class,
+					algorithmUserIds[i] - 1));
+		}
+	}
+
+	
+	
+
+	
+  /**
+   * Enter data into edit boxes of the main activity
+   * @param inputs array of big integers containing the data
+   * some of the inputs may be nulls
+   */
+	private void inputDataToEditBoxes(BigInteger[] inputs) {
+		// if the inputs are not null, input them into edit boxes
+		if (inputs != null) {
+			EditText[] editBoxes = new EditText[] {
+					(EditText) solo.getView(R.id.number_1),
+					(EditText) solo.getView(R.id.number_2),
+					(EditText) solo.getView(R.id.number_3),
+					(EditText) solo.getView(R.id.number_4),
+					(EditText) solo.getView(R.id.number_5) };
+
+			// enter the numbers into the edit boxes
+			for (int i = 0; i < inputs.length; i++) {
+				solo.clearEditText(editBoxes[i]);
+				solo.enterText(editBoxes[i], inputs[i].toString());
+			}
+		}
+	}
+	
+	
+	/**
+	 * Retrieve data from the edit boxes of the main activity
+	 * @return array of big integers containing the numbers entered to editboxes
+	 * if editbox is empty, the corresponding biginteger is equal to null        
+	 */
+	private BigInteger[] getDataFromEditBoxes() {
+		
+		EditText[] editBoxes = new EditText[] {
+				(EditText) solo.getView(R.id.number_1),
+				(EditText) solo.getView(R.id.number_2),
+				(EditText) solo.getView(R.id.number_3),
+				(EditText) solo.getView(R.id.number_4),
+				(EditText) solo.getView(R.id.number_5) };
+		
+		BigInteger[] numbers =new BigInteger[editBoxes.length];
+		
+		for(int i=0;i<editBoxes.length;i++) {
+			try{
+				BigInteger number=new BigInteger(editBoxes[i].getText().toString());
+				numbers[i]=number;
+			}
+			catch(NumberFormatException ex){}
+		}
+		return numbers;
+	}
+	
+	
+	/**
+	 * Create an array of BigInteger from a number of string arguments given in
+	 * arg
+	 * 
+	 * @param arg
+	 *            array of strings
+	 * @return array of bigIntegers created from arg If arg[i]=Null, result[i]
+	 *         is also null
+	 */
+	private BigInteger[] createBigIntegerArray(String... arg) {
+		BigInteger[] result = new BigInteger[arg.length];
+		for (int i = 0; i < arg.length; i++) {
+			result[i] = new BigInteger(arg[i]);
+		}
+		return result;
+
+	}
+	
 	/**
 	 * Run the user input on APP
 	 * 
@@ -933,17 +1288,7 @@ public class FactorizationAlgorithmsTests extends
 			}
 		}
 
-		// select algorithms in the spinners
-		for (int i = 0; i < algorithmUserIds.length; i++) {
-			// 0 is the first spinner in the layout
-			View view1 = solo.getView(Spinner.class, i);
-			solo.clickOnView(view1);
-			solo.scrollToTop(); // I put this in here so that it always keeps
-								// the list at start
-			// select the 10th item in the spinner
-			solo.clickOnView(solo.getView(TextView.class,
-					algorithmUserIds[i] - 1));
-		}
+		selectAlgorithms(algorithmUserIds);
 
 		// click on submit button
 		solo.clickOnButton("Submit");
@@ -952,6 +1297,5 @@ public class FactorizationAlgorithmsTests extends
 		assertTrue("Could not find the dialog!", solo.searchText(errorMessage));
 		solo.finishOpenedActivities();
 	}
-	
 	
 }
